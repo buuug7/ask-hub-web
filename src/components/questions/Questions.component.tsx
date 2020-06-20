@@ -3,7 +3,7 @@ import http from "../../http";
 import { Pagination, Question } from "../../app.interface";
 import { Link } from "react-router-dom";
 
-function Questions() {
+function QuestionsComponent() {
   const [pagination, setPagination] = useState<Pagination<Question>>({
     total: 0,
     totalPage: 0,
@@ -55,4 +55,4 @@ function Questions() {
   );
 }
 
-export default Questions;
+export default QuestionsComponent;
