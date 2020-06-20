@@ -37,3 +37,10 @@ export interface Tag {
   name: string;
   slug: string;
 }
+
+export interface AppContextInterface {
+  user: User | null;
+  loading: boolean;
+  updateUser: Function;
+  updateLoading: Function;
+}

@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import http from "../../http";
+import { AppContext } from "../../App";
 
 function Login() {
+  const context = useContext(AppContext);
   const [email, setEmail] = useState<string>("ask@dev.com");
   const [password, setPassword] = useState("123456");
 
@@ -16,6 +18,7 @@ function Login() {
   const getUserInfo = async () => {
     const { data } = await http.get(`/users/profile/${email}`);
     sessionStorage.setItem("user", JSON.stringify(data));
+    context.updateUser(data);
     console.log("userInfo", data);
   };
 

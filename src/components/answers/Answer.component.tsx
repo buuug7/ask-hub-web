@@ -9,7 +9,6 @@ function AnswerComponent({ id }: { id: string }) {
 
   const fetchAnswer = async () => {
     const { data } = await http.get(`/answers/${id}`);
-
     setAnswer(data);
   };
 

@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import http from "../../http";
 import { Pagination, Question } from "../../app.interface";
 import { Link } from "react-router-dom";
+import { AppContext } from "../../App";
 
 function QuestionsComponent() {
+  const context = useContext(AppContext);
   const [pagination, setPagination] = useState<Pagination<Question>>({
     total: 0,
     totalPage: 0,
@@ -16,7 +18,10 @@ function QuestionsComponent() {
     const query = new URLSearchParams();
     query.append("current", pagination.current.toString());
     query.append("per", pagination.per.toString());
+
+    context.updateLoading(true);
     const { data } = await http.get("/questions?" + query.toString());
+    context.updateLoading(false);
 
     setPagination({
       ...data,
