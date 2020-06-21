@@ -37,6 +37,7 @@ function App() {
   setTimeout(() => {
     setLoading(false);
   }, 30000);
+
   return (
     <AppContext.Provider value={contextValue}>
       <div className="App">

@@ -3,6 +3,7 @@ import http from "../../http";
 import { Pagination, Question } from "../../app.interface";
 import { Link } from "react-router-dom";
 import { AppContext } from "../../App";
+import { to } from "../../util";
 
 function QuestionsComponent() {
   const context = useContext(AppContext);
@@ -20,14 +21,20 @@ function QuestionsComponent() {
     query.append("per", pagination.per.toString());
 
     context.updateLoading(true);
-    const { data } = await http.get("/questions?" + query.toString());
-    context.updateLoading(false);
+    const [error, res] = await to(http.get("/questions?" + query.toString()));
+    if (error) {
+      context.updateLoading(false);
+      console.log("Error:", error);
+      return;
+    }
+
+    const { data } = res;
 
     setPagination({
       ...data,
       data: pagination.data.concat(data.data),
     });
-    console.log("=questions=", data);
+    context.updateLoading(false);
   };
 
   useEffect(() => {
