@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Answer } from "../../app.interface";
-import http from "../../http";
+import { http } from "../../http";
 import { Link } from "react-router-dom";
 import dayjs from "dayjs";
 
 function AnswerComponent({ id }: { id: string }) {
   const [answer, setAnswer] = useState<Answer>();
 
-  const fetchAnswer = async () => {
+  const getAnswer = useCallback(async () => {
     const { data } = await http.get(`/answers/${id}`);
     setAnswer(data);
-  };
+  }, [id]);
 
   useEffect(() => {
-    fetchAnswer().then(() => {});
-  }, []);
+    getAnswer().then(() => {});
+  }, [getAnswer]);
 
   return (
     <div className="AnswerComponent mb-5">

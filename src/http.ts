@@ -3,7 +3,7 @@ import { BASE_URL } from "./config";
 
 const token = sessionStorage.getItem("token");
 
-const http = axios.create({
+export const http = axios.create({
   baseURL: BASE_URL,
   timeout: 1000 * 30,
   headers: {
@@ -35,5 +35,3 @@ http.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-
-export default http;

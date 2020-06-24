@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Tag } from "../../app.interface";
-import http from "../../http";
+import { http } from "../../http";
 
 function TagsComponent() {
   const [tags, setTags] = useState<Tag[]>();

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Answer, Pagination } from "../../app.interface";
-import http from "../../http";
-import { Link } from "react-router-dom";
+import { http } from "../../http";
 import AnswerComponent from "./Answer.component";
 
 function AnswersComponent({ questionId }: { questionId: string }) {
@@ -13,10 +12,7 @@ function AnswersComponent({ questionId }: { questionId: string }) {
     data: [],
   });
 
-  // faker
-  questionId = "f8f6c7ec-38b0-4cec-90f1-2265a115ec9d";
-
-  const fetchAnswers = async (pagination: Pagination<Answer>) => {
+  const getAnswers = async () => {
     const query = new URLSearchParams();
     query.append("current", pagination.current.toString());
     query.append("per", pagination.per.toString());
@@ -27,13 +23,11 @@ function AnswersComponent({ questionId }: { questionId: string }) {
       ...data,
       data: pagination.data.concat(data.data),
     });
-
-    console.log("data", data);
   };
 
   useEffect(() => {
-    fetchAnswers(pagination).then(() => {});
-  }, []);
+    getAnswers().then(() => {});
+  }, [pagination.current]);
 
   return (
     <div className="Answers">
@@ -45,9 +39,11 @@ function AnswersComponent({ questionId }: { questionId: string }) {
       <button
         onClick={async () => {
           if (pagination.current < pagination.totalPage) {
-            await fetchAnswers({
-              ...pagination,
-              current: pagination.current + 1,
+            setPagination((pre) => {
+              return {
+                ...pre,
+                current: pre.current + 1,
+              };
             });
           }
         }}

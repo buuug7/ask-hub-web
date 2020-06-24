@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import http from "../../http";
+import { http } from "../../http";
 import { Question } from "../../app.interface";
 import dayjs from "dayjs";
 import AnswersComponent from "../answers/Answers.component";
@@ -9,14 +9,14 @@ function QuestionComponent() {
   const { id } = useParams();
   const [question, setQuestion] = useState<Question>();
 
-  const fetchQuestion = async () => {
+  const getQuestion = useCallback(async () => {
     const { data } = await http.get("/questions/" + id);
     setQuestion(data);
-  };
+  }, [id]);
 
   useEffect(() => {
-    fetchQuestion().then(() => {});
-  }, []);
+    getQuestion().then(() => {});
+  }, [getQuestion]);
 
   return (
     <div className="Question">

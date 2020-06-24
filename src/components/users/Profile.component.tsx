@@ -1,21 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import http from "../../http";
+import { http } from "../../http";
 import { User } from "../../app.interface";
 
 function UserProfileComponent() {
   const { email } = useParams();
   const [profile, setProfile] = useState<User>();
 
-  const getUserProfile = async () => {
+  const getUserProfile = useCallback(async () => {
     const { data } = await http.get(`/users/profile/${email}`);
-
     setProfile(data);
-  };
+  }, [email]);
 
   useEffect(() => {
     getUserProfile().then(() => {});
-  }, []);
+  }, [getUserProfile]);
 
   return (
     <div className="UserProfile">

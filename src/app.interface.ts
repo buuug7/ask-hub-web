@@ -1,8 +1,11 @@
-export interface Pagination<T> {
+export interface Pagination {
   total: number;
   totalPage: number;
   per: number;
   current: number;
+}
+
+export interface PaginationWithDataAttr<T> extends Pagination {
   data: T[];
 }
 

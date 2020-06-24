@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import http from "../../http";
+import { http } from "../../http";
 import { Pagination, Question } from "../../app.interface";
 import { Link } from "react-router-dom";
 import { AppContext } from "../../App";
@@ -28,6 +28,7 @@ function QuestionsComponent() {
       return;
     }
 
+    // @ts-ignore-next-line
     const { data } = res;
 
     setPagination({

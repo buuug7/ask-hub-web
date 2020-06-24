@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import http from "../../http";
+import { http } from "../../http";
 import { AppContext } from "../../App";
 
 function Login() {
