@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { http } from "../../http";
 import { Pagination, Question } from "../../app.interface";
 import { Link } from "react-router-dom";
@@ -8,39 +8,39 @@ import { to } from "../../util";
 function QuestionsComponent() {
   const context = useContext(AppContext);
   const [pagination, setPagination] = useState<Pagination<Question>>({
-    total: 0,
-    totalPage: 0,
-    per: 10,
-    current: 1,
+    meta: { total: 0, totalPage: 0, perPage: 10, currentPage: 1 },
     data: [],
   });
 
-  const fetchQuestions = async (pagination: Pagination<Question>) => {
+  const getQuestions = useCallback(async () => {
     const query = new URLSearchParams();
-    query.append("current", pagination.current.toString());
-    query.append("per", pagination.per.toString());
+    query.append("currentPage", pagination.meta.currentPage.toString());
+    query.append("perPage", pagination.meta.perPage.toString());
 
-    context.updateLoading(true);
     const [error, res] = await to(http.get("/questions?" + query.toString()));
+
     if (error) {
-      context.updateLoading(false);
       console.log("Error:", error);
       return;
     }
 
-    // @ts-ignore-next-line
     const { data } = res;
 
-    setPagination({
-      ...data,
-      data: pagination.data.concat(data.data),
+    setPagination((prevState) => {
+      return {
+        meta: data.meta,
+        data: prevState.data.concat(data.data),
+      };
     });
-    context.updateLoading(false);
-  };
+  }, [pagination.meta.perPage, pagination.meta.currentPage]);
 
   useEffect(() => {
-    fetchQuestions(pagination).then((r) => {});
-  }, []);
+    context.updateLoading(true);
+    getQuestions().then((r) => {
+      context.updateLoading(false);
+      console.log("fuck1");
+    });
+  }, [getQuestions]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="Questions">
@@ -54,10 +54,15 @@ function QuestionsComponent() {
 
       <button
         onClick={async () => {
-          if (pagination.current < pagination.totalPage) {
-            await fetchQuestions({
-              ...pagination,
-              current: pagination.current + 1,
+          if (pagination.meta.currentPage < pagination.meta.totalPage) {
+            setPagination((prevState) => {
+              return {
+                ...prevState,
+                meta: {
+                  ...prevState.meta,
+                  currentPage: prevState.meta.currentPage + 1,
+                },
+              };
             });
           }
         }}

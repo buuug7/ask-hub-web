@@ -1,13 +1,16 @@
-export interface Pagination {
+export interface PaginationMeta {
   total: number;
   totalPage: number;
-  per: number;
-  current: number;
+  perPage: number;
+  currentPage: number;
 }
 
-export interface PaginationWithDataAttr<T> extends Pagination {
+export interface Pagination<T> {
+  meta: PaginationMeta;
   data: T[];
 }
+
+export type PaginationNoDataAttr = Pick<Pagination<any>, "meta">;
 
 export interface User {
   id: string;
