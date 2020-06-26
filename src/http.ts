@@ -15,7 +15,7 @@ export const http = axios.create({
 http.interceptors.request.use(
   function (config) {
     // Do something before request is sent
-    console.log("request", config.url);
+    // console.log("request", config.url);
     return config;
   },
   function (error) {

@@ -4,8 +4,14 @@ import { http } from "../../http";
 import { Link } from "react-router-dom";
 import dayjs from "dayjs";
 
+import "./Answer.scss";
+
 function AnswerComponent({ id }: { id: string }) {
   const [answer, setAnswer] = useState<Answer>();
+  const [starCount, setStarCount] = useState(0);
+  const [isStarByRequestUser, setIsStarByRequestUser] = useState(false);
+
+  const [startToggleStar, setStartToggleStar] = useState(Math.random);
 
   const getAnswer = useCallback(async () => {
     const { data } = await http.get(`/answers/${id}`);
@@ -16,6 +22,24 @@ function AnswerComponent({ id }: { id: string }) {
     getAnswer().then(() => {});
   }, [getAnswer]);
 
+  const getAnswerStarCount = useCallback(async () => {
+    const { data } = await http.get(`/answers/${id}/starCount`);
+    setStarCount(data);
+  }, [id, startToggleStar]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    getAnswerStarCount().then(() => {});
+  }, [getAnswerStarCount]);
+
+  const checkIsStarByRequestUser = useCallback(async () => {
+    const { data } = await http.get(`/answers/${id}/isStarByRequestUser`);
+    setIsStarByRequestUser(data);
+  }, [id, startToggleStar]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    checkIsStarByRequestUser().then(() => {});
+  }, [checkIsStarByRequestUser]);
+
   return (
     <div className="AnswerComponent mb-5">
       <p>
@@ -24,6 +48,17 @@ function AnswerComponent({ id }: { id: string }) {
       </p>
       <p>Last updated at {dayjs(answer?.updatedAt).format("YYYY/MM/DD HH:mm")}</p>
       <p>{answer?.text}</p>
+      <div>
+        <button
+          onClick={async () => {
+            await http.post(`/answers/${id}/toggleStar`);
+            setStartToggleStar(Math.random);
+          }}
+          className={isStarByRequestUser ? "star" : ""}
+        >
+          {isStarByRequestUser ? "unStar" : "star"} ({starCount})
+        </button>
+      </div>
     </div>
   );
 }
