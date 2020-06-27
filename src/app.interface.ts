@@ -25,7 +25,7 @@ export interface Question {
   description: string;
   createdAt: string;
   updatedAt: string;
-  user: User;
+  user?: User;
   [propName: string]: any;
 }
 

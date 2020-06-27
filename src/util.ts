@@ -1,4 +1,5 @@
 import { AxiosResponse } from "axios";
+import Showdown from "showdown";
 
 export function getSessionUser() {
   const user = sessionStorage.getItem("user");
@@ -24,3 +25,10 @@ export function to<T extends AxiosResponse, U>(
       return [err, undefined];
     });
 }
+
+export const ShowdownConverter = new Showdown.Converter({
+  tables: true,
+  simplifiedAutoLink: true,
+  strikethrough: true,
+  tasklists: true,
+});

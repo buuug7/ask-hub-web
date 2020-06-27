@@ -16,8 +16,10 @@
     "prettier": "^2.0.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-mde": "^10.1.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
+    "showdown": "^1.9.1",
     "typescript": "^3.7.5",
     "utilities-css": "^4.1.0"
   },
@@ -43,6 +45,7 @@
     ]
   },
   "devDependencies": {
-    "@types/react-router-dom": "^5.1.5"
+    "@types/react-router-dom": "^5.1.5",
+    "@types/showdown": "^1.9.3"
   }
 }
