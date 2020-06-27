@@ -26,6 +26,7 @@ export interface Question {
   createdAt: string;
   updatedAt: string;
   user?: User;
+  tags: Tag[];
   [propName: string]: any;
 }
 

@@ -14,6 +14,7 @@ function QuestionComponent() {
     description: "",
     createdAt: "",
     updatedAt: "",
+    tags: [],
   });
 
   const getQuestion = useCallback(async () => {
@@ -27,8 +28,22 @@ function QuestionComponent() {
 
   return (
     <div className="Question">
-      <h4>{question.title}</h4>
+      <h2>{question.title}</h2>
       <p>{dayjs(question.createdAt).format("YYYY-MM-DD HH:mm:ss")}</p>
+      <div>
+        <h4>Tags: </h4>
+        {question.tags.map((item) => (
+          <span key={item.id} className="mx-1 p-1" style={{ backgroundColor: "rgba(0,0,0,0.1)" }}>
+            {item.name}
+          </span>
+        ))}
+      </div>
+      <div>
+        <h4>User:</h4>
+        <p>
+          {question.user?.name} {question.user?.email}
+        </p>
+      </div>
       <p
         dangerouslySetInnerHTML={{
           __html: ShowdownConverter.makeHtml(question.description),
