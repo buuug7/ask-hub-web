@@ -24,12 +24,10 @@ function QuestionsComponent() {
       return;
     }
 
-    const { data } = res;
-
     setPagination((prevState) => {
       return {
-        meta: data.meta,
-        data: prevState.data.concat(data.data),
+        meta: res?.data.meta,
+        data: prevState.data.concat(res?.data.data),
       };
     });
   }, [pagination.meta.perPage, pagination.meta.currentPage]);

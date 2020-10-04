@@ -1,12 +1,14 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { Answer } from "../../app.interface";
 import { http } from "../../http";
 import { Link } from "react-router-dom";
 import dayjs from "dayjs";
 
 import "./Answer.scss";
+import { AppContext } from "../../App";
 
 function AnswerComponent({ id }: { id: string }) {
+  const context = useContext(AppContext);
   const [answer, setAnswer] = useState<Answer>();
   const [starCount, setStarCount] = useState(0);
   const [isStarByRequestUser, setIsStarByRequestUser] = useState(false);
@@ -32,6 +34,10 @@ function AnswerComponent({ id }: { id: string }) {
   }, [getAnswerStarCount]);
 
   const checkIsStarByRequestUser = useCallback(async () => {
+    if (!context.user) {
+      return;
+    }
+
     const { data } = await http.get(`/answers/${id}/isStarByRequestUser`);
     setIsStarByRequestUser(data);
   }, [id, startToggleStar]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -50,6 +56,7 @@ function AnswerComponent({ id }: { id: string }) {
       <p>{answer?.text}</p>
       <div>
         <button
+          disabled={context.user === null}
           onClick={async () => {
             await http.post(`/answers/${id}/toggleStar`);
             setStartToggleStar(Math.random);
