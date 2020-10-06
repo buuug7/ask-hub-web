@@ -46,17 +46,17 @@ function App() {
         {loading && <FullScreenLoading />}
         <BrowserRouter>
           <Navbar />
-          <Switch>
-            <div className="container" style={{ maxWidth: "1200px" }}>
+          <div className="container" style={{ maxWidth: "1200px" }}>
+            <Switch>
               <Route exact path="/login" children={<Login />} />
               <Route exact path="/logout" children={<Logout />} />
               <Route exact path="/questions" children={<QuestionsComponent />} />
               <Route exact path="/questions/create" children={<QuestionCreateComponent />} />
-              <Route exact path="/questions/:id" children={<QuestionComponent />} />
+              <Route exact path="/questions/view/:id" children={<QuestionComponent />} />
               <Route exact path="/users/profile/:email" children={<UserProfileComponent />} />
               <Route exact path="/tags" children={<TagsComponent />} />
-            </div>
-          </Switch>
+            </Switch>
+          </div>
         </BrowserRouter>
       </div>
     </AppContext.Provider>

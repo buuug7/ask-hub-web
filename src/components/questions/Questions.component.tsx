@@ -45,7 +45,7 @@ function QuestionsComponent() {
       <ul>
         {pagination.data.map((item) => (
           <li key={item.id}>
-            <Link to={`/questions/${item.id}`}>{item.title}</Link>
+            <Link to={`/questions/view/${item.id}`}>{item.title}</Link>
           </li>
         ))}
       </ul>

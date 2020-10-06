@@ -2,6 +2,9 @@
 @import "~bootstrap/scss/bootstrap-reboot.scss";
 @import "colors";
 
+body {
+  font-size: 14px;
+}
 :root {
   @each $color-name, $color-value in $colors {
     --color-#{$color-name}: #{$color-value};

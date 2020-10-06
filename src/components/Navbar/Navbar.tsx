@@ -11,7 +11,7 @@ function Navbar() {
     <div className="Navbar dark">
       <div className="container">
         <a href="/" className="NavbarBrand">
-          AskHub
+          Askhub
         </a>
         <button
           className="NavbarToggleBtn"
