@@ -8,7 +8,7 @@ function Navbar() {
   const { pathname } = location;
 
   return (
-    <div className="Navbar light">
+    <div className="Navbar dark blue">
       <div className="container">
         <a href="/" className="NavbarBrand">
           AskHub

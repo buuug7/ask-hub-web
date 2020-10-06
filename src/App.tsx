@@ -47,7 +47,7 @@ function App() {
         <BrowserRouter>
           <Navbar />
           <Switch>
-            <div className="container" style={{ width: "1200px" }}>
+            <div className="container" style={{ maxWidth: "1200px" }}>
               <Route exact path="/login" children={<Login />} />
               <Route exact path="/logout" children={<Logout />} />
               <Route exact path="/questions" children={<QuestionsComponent />} />
