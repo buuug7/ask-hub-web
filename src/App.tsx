@@ -12,6 +12,7 @@ import FullScreenLoading from "./components/Loading/FullScreenLoading";
 import { AppContextInterface, User } from "./app.interface";
 import { getSessionUser } from "./util";
 import QuestionCreateComponent from "./components/questions/QuestionCreate.component";
+import Navbar from "./components/Navbar/Navbar";
 
 export const AppContext = createContext<AppContextInterface>({
   user: null,
@@ -44,29 +45,17 @@ function App() {
       <div className="App">
         {loading && <FullScreenLoading />}
         <BrowserRouter>
-          <div>
-            <Link to={"/questions"} className="mr-2">
-              questions
-            </Link>
-            <Link to={"/questions/create"} className="mr-2">
-              create questions
-            </Link>
-            <Link to={"/tags"} className="mr-2">
-              tags
-            </Link>
-            <Link to={"/login"} className="mr-2">
-              login
-            </Link>
-            <Link to={"/logout"}>logout</Link>
-          </div>
+          <Navbar />
           <Switch>
-            <Route exact path="/login" children={<Login />} />
-            <Route exact path="/logout" children={<Logout />} />
-            <Route exact path="/questions" children={<QuestionsComponent />} />
-            <Route exact path="/questions/create" children={<QuestionCreateComponent />} />
-            <Route exact path="/questions/:id" children={<QuestionComponent />} />
-            <Route exact path="/users/profile/:email" children={<UserProfileComponent />} />
-            <Route exact path="/tags" children={<TagsComponent />} />
+            <div className="container" style={{ width: "1200px" }}>
+              <Route exact path="/login" children={<Login />} />
+              <Route exact path="/logout" children={<Logout />} />
+              <Route exact path="/questions" children={<QuestionsComponent />} />
+              <Route exact path="/questions/create" children={<QuestionCreateComponent />} />
+              <Route exact path="/questions/:id" children={<QuestionComponent />} />
+              <Route exact path="/users/profile/:email" children={<UserProfileComponent />} />
+              <Route exact path="/tags" children={<TagsComponent />} />
+            </div>
           </Switch>
         </BrowserRouter>
       </div>

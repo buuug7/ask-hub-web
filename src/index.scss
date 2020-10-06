@@ -1,0 +1,20 @@
+@import "~utilities-css/dist/utilities-css.css";
+@import "~bootstrap/scss/bootstrap-reboot.scss";
+@import "colors";
+
+:root {
+  @each $color-name, $color-value in $colors {
+    --color-#{$color-name}: #{$color-value};
+  }
+
+  @each $theme-color-name, $theme-color-value in $theme-colors {
+    --color-#{$theme-color-name}: #{$theme-color-value};
+  }
+
+  --font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+    "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+    "Noto Color Emoji";
+  --font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
+    monospace;
+  --gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+}
