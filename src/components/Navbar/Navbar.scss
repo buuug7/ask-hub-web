@@ -124,7 +124,7 @@
 
 // dark theme
 .Navbar.dark {
-  background-color: $dark;
+  background-color: $black;
   .NavbarBrand {
     color: #fff;
   }
@@ -142,7 +142,7 @@
     color: rgba(255, 255, 255, 0.5);
 
     &.active {
-      color: #fff;
+      color: $gray-100;
     }
   }
 }
