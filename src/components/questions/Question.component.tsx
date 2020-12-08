@@ -7,6 +7,7 @@ import AnswersComponent from "../answers/Answers.component";
 import { ShowdownConverter } from "../../util";
 
 function QuestionComponent() {
+  // @ts-ignore
   const { id } = useParams();
   const [question, setQuestion] = useState<Question>({
     id: "",

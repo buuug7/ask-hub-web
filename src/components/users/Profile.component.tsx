@@ -4,6 +4,7 @@ import { http } from "../../http";
 import { User } from "../../app.interface";
 
 function UserProfileComponent() {
+  // @ts-ignore
   const { email } = useParams();
   const [profile, setProfile] = useState<User>();
 
