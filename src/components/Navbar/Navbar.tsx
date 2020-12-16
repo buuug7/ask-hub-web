@@ -1,6 +1,6 @@
-import React from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import "./Navbar.scss";
+import Button from "../button/Button";
 
 function Navbar() {
   const history = useHistory();
@@ -61,20 +61,20 @@ function Navbar() {
               create questions
             </li>
           </ul>
-          <button
+
+          <Button
             onClick={() => {
               history.push("/login");
             }}
-          >
-            login
-          </button>
-          <button
+            text={"login"}
+          />
+
+          <Button
             onClick={() => {
               history.push("/logout");
             }}
-          >
-            logout
-          </button>
+            text={"logout"}
+          />
         </div>
       </div>
     </div>

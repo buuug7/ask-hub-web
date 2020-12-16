@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { http } from "../../http";
 import ReactMde from "react-mde";
 import "react-mde/lib/styles/css/react-mde-all.css";

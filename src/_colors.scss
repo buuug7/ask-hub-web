@@ -1,3 +1,4 @@
+// from bootstrap variables
 // Color system
 
 $white: #fff !default;
@@ -62,7 +63,7 @@ $info: $cyan !default;
 $warning: $yellow !default;
 $danger: $red !default;
 $light: $gray-100 !default;
-$dark: $gray-800 !default;
+$dark: $gray-900 !default;
 
 // scss-docs-start theme-colors-map
 $theme-colors: (

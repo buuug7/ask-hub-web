@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import { createContext, useState } from "react";
 import "./App.scss";
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 
@@ -13,6 +13,7 @@ import { AppContextInterface, User } from "./app.interface";
 import { getSessionUser } from "./util";
 import QuestionCreateComponent from "./components/questions/QuestionCreate.component";
 import Navbar from "./components/Navbar/Navbar";
+import Playground from "./components/playground/Playground";
 
 export const AppContext = createContext<AppContextInterface>({
   user: null,
@@ -55,6 +56,7 @@ function App() {
               <Route exact path="/questions/view/:id" children={<QuestionComponent />} />
               <Route exact path="/users/profile/:email" children={<UserProfileComponent />} />
               <Route exact path="/tags" children={<TagsComponent />} />
+              <Route exact path="/playground" children={<Playground />} />
             </Switch>
           </div>
         </BrowserRouter>
