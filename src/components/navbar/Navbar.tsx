@@ -61,28 +61,32 @@ function Navbar() {
               create questions
             </li>
             <li
-              className={pathname === "/playground" ? "NavbarNavItem active" : "NavbarNavItem"}
+              className={pathname === "/ui" ? "NavbarNavItem active" : "NavbarNavItem"}
               onClick={() => {
-                history.push("/playground");
+                history.push("/ui");
               }}
             >
-              playground
+              UI
             </li>
           </ul>
 
           <Button
+            className="btn primary"
             onClick={() => {
               history.push("/login");
             }}
-            text={"login"}
-          />
+          >
+            login
+          </Button>
 
           <Button
+            className="btn ml-2"
             onClick={() => {
               history.push("/logout");
             }}
-            text={"logout"}
-          />
+          >
+            logout
+          </Button>
         </div>
       </div>
     </div>

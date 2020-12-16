@@ -1,19 +1,12 @@
 import "./Button.scss";
 
-function Button({
-  text,
-  status,
-  onClick,
-}: {
-  text: string;
-  status?: string[];
-  onClick?: () => void;
-}) {
-  return (
-    <button onClick={onClick} className={`btn ${status?.join(" ")}`}>
-      {text}
-    </button>
-  );
+type MyButtonPropsType = React.DetailedHTMLProps<
+  React.ButtonHTMLAttributes<HTMLButtonElement>,
+  HTMLButtonElement
+>;
+
+function Button(props: MyButtonPropsType) {
+  return <button {...props}>{props.children}</button>;
 }
 
 export default Button;

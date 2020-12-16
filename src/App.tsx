@@ -13,7 +13,7 @@ import { AppContextInterface, User } from "./app.interface";
 import { getSessionUser } from "./util";
 import QuestionCreateComponent from "./components/questions/QuestionCreate.component";
 import Navbar from "./components/navbar/Navbar";
-import Playground from "./components/playground/Playground";
+import UiIndex from "./components/ui/Index";
 
 export const AppContext = createContext<AppContextInterface>({
   user: null,
@@ -56,7 +56,7 @@ function App() {
               <Route exact path="/questions/view/:id" children={<QuestionComponent />} />
               <Route exact path="/users/profile/:email" children={<UserProfileComponent />} />
               <Route exact path="/tags" children={<TagsComponent />} />
-              <Route exact path="/playground" children={<Playground />} />
+              <Route exact path="/ui" children={<UiIndex />} />
             </Switch>
           </div>
         </BrowserRouter>
