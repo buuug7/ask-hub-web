@@ -12,7 +12,7 @@ import FullScreenLoading from "./components/Loading/FullScreenLoading";
 import { AppContextInterface, User } from "./app.interface";
 import { getSessionUser } from "./util";
 import QuestionCreateComponent from "./components/questions/QuestionCreate.component";
-import Navbar from "./components/Navbar/Navbar";
+import Navbar from "./components/navbar/Navbar";
 import Playground from "./components/playground/Playground";
 
 export const AppContext = createContext<AppContextInterface>({
