@@ -2,10 +2,8 @@ import Button from "../button/Button";
 
 function Playground() {
   return (
-    <div className="playground">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam cupiditate, debitis eum
-      nulla optio quam suscipit tempora temporibus tenetur voluptate. Accusamus atque beatae
-      doloremque esse, impedit inventore laudantium quis temporibus.
+    <div className="playground mt-3">
+      <h2>Button</h2>
       <p>
         <Button text={"default"} />
       </p>

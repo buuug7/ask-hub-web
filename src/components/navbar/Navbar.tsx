@@ -60,6 +60,14 @@ function Navbar() {
             >
               create questions
             </li>
+            <li
+              className={pathname === "/playground" ? "NavbarNavItem active" : "NavbarNavItem"}
+              onClick={() => {
+                history.push("/playground");
+              }}
+            >
+              playground
+            </li>
           </ul>
 
           <Button
