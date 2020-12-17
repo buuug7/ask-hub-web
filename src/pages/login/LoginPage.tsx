@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { http } from "../../http";
 import { AppContext } from "../../App";
 
-function Login() {
+function LoginPage() {
   const context = useContext(AppContext);
   const [email, setEmail] = useState<string>("ask@dev.com");
   const [password, setPassword] = useState("123456");
@@ -23,8 +23,8 @@ function Login() {
   };
 
   return (
-    <div className="Login">
-      <h4>Login to ask hub</h4>
+    <div className="LoginPage">
+      <h4>Login</h4>
       <form>
         <div className="formGroup">
           <label htmlFor="email">Email</label>
@@ -62,4 +62,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default LoginPage;

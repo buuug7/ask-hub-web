@@ -58,7 +58,7 @@ function Navbar() {
                 history.push("/questions/create");
               }}
             >
-              create questions
+              提问
             </li>
             <li
               className={pathname === "/ui" ? "NavbarNavItem active" : "NavbarNavItem"}
