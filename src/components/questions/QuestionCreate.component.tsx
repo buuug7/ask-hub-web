@@ -4,7 +4,6 @@ import ReactMde from "react-mde";
 import "react-mde/lib/styles/css/react-mde-all.css";
 import { ShowdownConverter } from "../../util";
 import { Tag } from "../../app.interface";
-import Button from "../button/Button";
 
 function QuestionCreateComponent() {
   const [title, setTitle] = useState("");
@@ -79,7 +78,7 @@ function QuestionCreateComponent() {
               ))}
             </div>
           </div>
-          <Button
+          <button
             className="btn primary"
             onClick={async (e) => {
               e.preventDefault();
@@ -91,7 +90,7 @@ function QuestionCreateComponent() {
             }}
           >
             Create
-          </Button>
+          </button>
         </form>
       </div>
     </div>

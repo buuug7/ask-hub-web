@@ -2,22 +2,30 @@ import "./Home.scss";
 import { ReactComponent as SearchIcon } from "../../../node_modules/bootstrap-icons/icons/search.svg";
 
 function Home() {
-  console.log(SearchIcon);
   return (
     <div className="Home mt-4">
-      <div className="search-input-container">
-        <input placeholder="search askhub questions" type="text" className="search-input" />
-        <div className="search-btn">
-          <SearchIcon />
+      <h2 className="title">Askhub 一个简单实用的问答网站</h2>
+      <div className="search-box mb-4 box-shadow1">
+        <div className="input-group">
+          <input className="form-control" type="text" placeholder="Search Askhub" />
+          <button className="btn primary">
+            <SearchIcon />
+          </button>
         </div>
       </div>
+
       <h2>趋势</h2>
-      <div>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad culpa deserunt dignissimos
-        exercitationem, labore magnam modi possimus ratione reprehenderit sequi. Accusantium aliquid
-        dolorem error harum ipsa odio repellendus sapiente similique!
+      <div className="display-flex">
+        {[1, 2, 3, 4].map((item) => (
+          <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
+        ))}
       </div>
       <h2>最新</h2>
+      <div className="display-flex">
+        {[1, 2, 3, 4].map((item) => (
+          <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
+        ))}
+      </div>
     </div>
   );
 }

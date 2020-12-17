@@ -1,6 +1,5 @@
 import { useHistory, useLocation } from "react-router-dom";
 import "./Navbar.scss";
-import Button from "../button/Button";
 
 function Navbar() {
   const history = useHistory();
@@ -40,7 +39,7 @@ function Navbar() {
                 history.push("/questions");
               }}
             >
-              questions
+              发现
             </li>
             <li
               className={pathname === "/tags" ? "NavbarNavItem active" : "NavbarNavItem"}
@@ -70,23 +69,14 @@ function Navbar() {
             </li>
           </ul>
 
-          <Button
+          <button
             className="btn primary"
             onClick={() => {
               history.push("/login");
             }}
           >
             login
-          </Button>
-
-          <Button
-            className="btn ml-2"
-            onClick={() => {
-              history.push("/logout");
-            }}
-          >
-            logout
-          </Button>
+          </button>
         </div>
       </div>
     </div>

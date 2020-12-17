@@ -10,3 +10,11 @@
   padding-right: calc(var(--bs-gutter-x) / 2);
   padding-left: calc(var(--bs-gutter-x) / 2);
 }
+
+.box-shadow1 {
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.box-shadow2 {
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25)
+}
