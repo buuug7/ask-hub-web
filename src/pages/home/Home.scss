@@ -1,8 +1,7 @@
-.Home {
-
+.HomePage {
   width: 100%;
 
-  .title {
+  .HomePageTitle {
     font-size: 40px;
     font-weight: 300;
     margin: 0;
@@ -12,19 +11,16 @@
     text-align: center;
   }
 
-  .search-box {
+  .HomePageSearchBox {
     width: 100%;
     margin: 0 auto;
 
-    .form-control {
-      padding: .6rem .75rem;
+    .FormControl {
+      padding: 0.6rem 0.75rem;
     }
 
     @media (min-width: 992px) {
       width: 768px;
     }
   }
-
-
 }
-

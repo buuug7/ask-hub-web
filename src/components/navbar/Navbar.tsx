@@ -70,7 +70,7 @@ function Navbar() {
           </ul>
 
           <button
-            className="btn primary"
+            className="Button ButtonPrimary"
             onClick={() => {
               history.push("/login");
             }}

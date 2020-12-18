@@ -3,22 +3,22 @@ export default function ButtonDemo() {
   return (
     <div>
       <p>
-        <button className="btn">default</button>
+        <button className="Button">default</button>
       </p>
       <p>
-        <button className="btn active">default active</button>
+        <button className="Button active">default active</button>
       </p>
       <p>
-        <button className="btn disabled">default disabled</button>
+        <button className="Button disabled">default disabled</button>
       </p>
       <p>
-        <button className="btn primary">primary</button>
+        <button className="Button ButtonPrimary">primary</button>
       </p>
       <p>
-        <button className="btn primary active">primary active</button>
+        <button className="Button ButtonPrimary active">primary active</button>
       </p>
       <p>
-        <button className="btn primary disabled">primary disabled</button>
+        <button className="Button ButtonPrimary disabled">primary disabled</button>
       </p>
     </div>
   );

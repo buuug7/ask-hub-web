@@ -1,7 +1,7 @@
 @import "colors";
 @import "~rfs/scss";
 
-.form-control {
+.FormControl {
   display: block;
   width: 100%;
   padding: 0.375rem 0.75rem;
@@ -81,13 +81,17 @@
   }
 }
 
-.input-group {
+.InputGroup {
   position: relative;
   display: flex;
   width: 100%;
 
-  > .form-control {
+  > .FormControl {
     position: relative;
     flex: 1 1 auto;
   }
+}
+
+.FormLabel{
+  margin-bottom: .5rem;
 }
