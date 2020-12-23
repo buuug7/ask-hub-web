@@ -20,7 +20,7 @@ function QuestionCreateComponent() {
 
     getTags().then((tags) => {
       console.log("tags", tags);
-      setTags(tags[0]);
+      setTags(tags);
     });
   }, []);
 

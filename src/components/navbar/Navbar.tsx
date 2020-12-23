@@ -1,9 +1,12 @@
 import { useHistory, useLocation } from "react-router-dom";
 import "./Navbar.scss";
+import { AppContext } from "../../App";
+import { useContext } from "react";
 
 function Navbar() {
   const history = useHistory();
   const location = useLocation();
+  const context = useContext(AppContext);
   const { pathname } = location;
 
   return (
@@ -63,14 +66,28 @@ function Navbar() {
               UI
             </li>
           </ul>
-          <button
-            className="Button ButtonPrimary"
-            onClick={() => {
-              history.push("/login");
-            }}
-          >
-            login
-          </button>
+          {!context.user && (
+            <button
+              className="Button ButtonPrimary"
+              onClick={() => {
+                history.push("/login");
+              }}
+            >
+              login
+            </button>
+          )}
+
+          <div className="NavbarUser">
+            <a
+              href="#"
+              onClick={() => {
+                // TODO:
+                // history.push('/user/profile')
+              }}
+            >
+              {`${context.user?.name}(${context.user?.email})`}
+            </a>
+          </div>
         </div>
       </div>
     </div>
