@@ -1,0 +1,12 @@
+.SearchBox {
+  width: 100%;
+  margin: 0 auto;
+
+  .FormControl {
+    padding: 0.6rem 0.75rem;
+  }
+
+  @media (min-width: 992px) {
+    width: 768px;
+  }
+}

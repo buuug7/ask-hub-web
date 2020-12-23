@@ -1,4 +1,4 @@
-@import "../../scss/colors";
+@import "../../scss/variables";
 
 .Navbar {
   position: relative;
@@ -63,6 +63,25 @@
     display: none;
   }
 
+  .NavBarSearch {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+    .FormControl {
+      background-color: $black;
+      border: 1px solid #444d56;
+      color: #fff;
+      width: 100%;
+      &:focus {
+        color: $gray-900;
+        background-color: $white;
+        border: none;
+        box-shadow: none;
+      }
+    }
+  }
+
   .NavbarNav {
     display: flex;
     flex-direction: column;
@@ -80,26 +99,42 @@
   }
 }
 
-@media (min-width: 992px) {
+@media (min-width: $break-point) {
   .Navbar {
     flex-wrap: nowrap;
     justify-content: flex-start;
-  }
 
-  .NavbarToggleBtn {
-    display: none;
-  }
-
-  .NavBarCollapse {
-    display: flex !important;
-
-    .NavbarNav {
-      flex-direction: row;
+    .NavbarToggleBtn {
+      display: none;
     }
 
-    .NavbarNavItem {
-      padding-right: 0.5rem;
-      padding-left: 0.5rem;
+    .NavBarCollapse {
+      display: flex !important;
+
+      .NavbarNav {
+        flex-direction: row;
+      }
+
+      .NavbarNavItem {
+        padding-right: 0.5rem;
+        padding-left: 0.5rem;
+      }
+    }
+
+    .NavBarSearch {
+      margin-right: 1rem;
+      margin-top: 0;
+    }
+    .NavBarSearch .FormControl {
+      transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, width 0.2s ease;
+      width: 10rem;
+      &:focus {
+        color: $gray-900;
+        background-color: $white;
+        border: none;
+        box-shadow: none;
+        width: 300px;
+      }
     }
   }
 }

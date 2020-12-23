@@ -32,6 +32,9 @@ function Navbar() {
           <span className="NavBarToggleIcon" />
         </button>
         <div className="NavBarCollapse">
+          <div className="NavBarSearch">
+            <input className="FormControl" type="text" placeholder="Search Askhub" />
+          </div>
           <ul className="NavbarNav">
             <li
               className={pathname === "/questions" ? "NavbarNavItem active" : "NavbarNavItem"}
@@ -40,14 +43,6 @@ function Navbar() {
               }}
             >
               发现
-            </li>
-            <li
-              className={pathname === "/tags" ? "NavbarNavItem active" : "NavbarNavItem"}
-              onClick={() => {
-                history.push("/tags");
-              }}
-            >
-              tags
             </li>
             <li
               className={
@@ -68,7 +63,6 @@ function Navbar() {
               UI
             </li>
           </ul>
-
           <button
             className="Button ButtonPrimary"
             onClick={() => {

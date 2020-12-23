@@ -7,7 +7,7 @@ function TagsComponent() {
 
   const getTags = async () => {
     const { data } = await http.get("/tags");
-    setTags(data[0]);
+    setTags(data);
   };
 
   useEffect(() => {
