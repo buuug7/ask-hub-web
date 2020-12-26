@@ -1,5 +1,7 @@
 .HomePage {
   width: 100%;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
 
   .HomePageTitle {
     font-size: 40px;
@@ -8,5 +10,9 @@
     margin: 0 0 20px;
     position: relative;
     text-align: center;
+  }
+
+  .HomePageLeft {
+    background-color: #fff;
   }
 }

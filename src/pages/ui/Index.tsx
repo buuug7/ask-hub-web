@@ -1,6 +1,6 @@
 import ButtonDemo from "./ButtonDemo";
 import FormDemo from "./FormDemo";
-import SearchBox from "../../components/search-box/SearchBox";
+import SearchBox from "../../components/SearchBox";
 
 function Index() {
   return (

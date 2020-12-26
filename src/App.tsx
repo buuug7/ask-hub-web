@@ -2,20 +2,22 @@ import { createContext, useState } from "react";
 import "./App.scss";
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 
-import Logout from "./components/logout/Logout";
+import LogoutComponent from "./components/LogoutComponent";
 import QuestionsComponent from "./components/questions/Questions.component";
 import QuestionComponent from "./components/questions/Question.component";
-import UserProfileComponent from "./components/users/Profile.component";
-import TagsComponent from "./components/tags/Tags.component";
-import FullScreenLoading from "./components/loading/FullScreenLoading";
+import UserProfileComponent from "./components/UserProfileComponent";
+import TagsComponent from "./components/TagsComponent";
+import FullScreenLoading from "./components/FullScreenLoading";
 
 import { AppContextInterface, User } from "./app.interface";
 import { getSessionUser } from "./util";
 import QuestionCreateComponent from "./components/questions/QuestionCreate.component";
-import Navbar from "./components/navbar/Navbar";
+import NavbarComponent from "./components/NavbarComponent";
 import UiIndex from "./pages/ui/Index";
-import LoginPage from "./pages/login/LoginPage";
-import Home from "./pages/home/Home";
+import LoginPage from "./pages/LoginPage";
+import HomePage from "./pages/HomePage";
+
+import QuestionPage from "./pages/QuestionPage";
 
 export const AppContext = createContext<AppContextInterface>({
   user: null,
@@ -48,15 +50,15 @@ function App() {
       <div className="App">
         {loading && <FullScreenLoading />}
         <BrowserRouter>
-          <Navbar />
+          <NavbarComponent />
           <div className="container" style={{ maxWidth: "1200px" }}>
             <Switch>
-              <Route exact path="/" children={<Home />} />
+              <Route exact path="/" children={<HomePage />} />
               <Route exact path="/login" children={<LoginPage />} />
-              <Route exact path="/logout" children={<Logout />} />
+              <Route exact path="/logout" children={<LogoutComponent />} />
               <Route exact path="/questions" children={<QuestionsComponent />} />
               <Route exact path="/questions/create" children={<QuestionCreateComponent />} />
-              <Route exact path="/questions/view/:id" children={<QuestionComponent />} />
+              <Route exact path="/questions/view/:id" children={<QuestionPage />} />
               <Route exact path="/users/profile/:email" children={<UserProfileComponent />} />
               <Route exact path="/tags" children={<TagsComponent />} />
               <Route exact path="/ui" children={<UiIndex />} />

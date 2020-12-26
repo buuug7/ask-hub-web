@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { http } from "../../http";
-import { User } from "../../app.interface";
+import { http } from "../http";
+import { User } from "../app.interface";
 
 function UserProfileComponent() {
   // @ts-ignore

@@ -1,6 +1,6 @@
 import React from "react";
 
-function Logout() {
+function LogoutComponent() {
   return (
     <div className="logout">
       <h4>Did you really logout?</h4>
@@ -17,4 +17,4 @@ function Logout() {
   );
 }
 
-export default Logout;
+export default LogoutComponent;

@@ -1,4 +1,4 @@
-import { ReactComponent as SearchIcon } from "../../../node_modules/bootstrap-icons/icons/search.svg";
+import { ReactComponent as SearchIcon } from "bootstrap-icons/icons/search.svg";
 import "./SearchBox.scss";
 
 export default function SearchBox() {

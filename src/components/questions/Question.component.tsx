@@ -1,14 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import { http } from "../../http";
 import { Question } from "../../app.interface";
 import dayjs from "dayjs";
 import AnswersComponent from "../answers/Answers.component";
 import { ShowdownConverter } from "../../util";
 
-function QuestionComponent() {
-  // @ts-ignore
-  const { id } = useParams();
+function QuestionComponent({ id }: { id: string }) {
   const [question, setQuestion] = useState<Question>({
     id: "",
     title: "",
@@ -34,7 +31,7 @@ function QuestionComponent() {
       <div>
         <h4>Tags: </h4>
         {question.tags.map((item) => (
-          <span key={item.id} className="mx-1 p-1" style={{ backgroundColor: "rgba(0,0,0,0.1)" }}>
+          <span key={item.id} className="mx-1 p-1">
             {item.name}
           </span>
         ))}

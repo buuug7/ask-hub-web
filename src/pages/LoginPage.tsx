@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
-import { http } from "../../http";
-import { AppContext } from "../../App";
+import { http } from "../http";
+import { AppContext } from "../App";
 
 function LoginPage() {
   const context = useContext(AppContext);

@@ -1,9 +1,9 @@
 import { useHistory, useLocation } from "react-router-dom";
-import "./Navbar.scss";
-import { AppContext } from "../../App";
+import "./NavbarComponent.scss";
+import { AppContext } from "../App";
 import { useContext } from "react";
 
-function Navbar() {
+function NavbarComponent() {
   const history = useHistory();
   const location = useLocation();
   const context = useContext(AppContext);
@@ -96,4 +96,4 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+export default NavbarComponent;

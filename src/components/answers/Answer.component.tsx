@@ -49,7 +49,7 @@ function AnswerComponent({ id }: { id: string }) {
   return (
     <div className="AnswerComponent mb-5">
       <p>
-        Posted by <Link to={`/users/profile/${answer?.user.email}`}>{answer?.user.name}</Link> At{" "}
+        Posted by <Link to={`/users/profile/${answer?.user?.email}`}>{answer?.user?.name}</Link> At{" "}
         {dayjs(answer?.createdAt).format("YYYY/MM/DD HH:mm")}
       </p>
       <p>Last updated at {dayjs(answer?.updatedAt).format("YYYY/MM/DD HH:mm")}</p>
@@ -61,7 +61,7 @@ function AnswerComponent({ id }: { id: string }) {
             await http.post(`/answers/${id}/toggleStar`);
             setStartToggleStar(Math.random);
           }}
-          className={isStarByRequestUser ? "star" : ""}
+          className={isStarByRequestUser ? "Button ButtonPrimary" : "Button"}
         >
           {isStarByRequestUser ? "unStar" : "star"} ({starCount})
         </button>

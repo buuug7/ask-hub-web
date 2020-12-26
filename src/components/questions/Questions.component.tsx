@@ -36,7 +36,6 @@ function QuestionsComponent() {
     context.updateLoading(true);
     getQuestions().then((r) => {
       context.updateLoading(false);
-      console.log("fuck1");
     });
   }, [getQuestions]); // eslint-disable-line react-hooks/exhaustive-deps
 
