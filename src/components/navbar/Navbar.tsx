@@ -77,17 +77,19 @@ function Navbar() {
             </button>
           )}
 
-          <div className="NavbarUser">
-            <a
-              href="#"
-              onClick={() => {
-                // TODO:
-                // history.push('/user/profile')
-              }}
-            >
-              {`${context.user?.name}(${context.user?.email})`}
-            </a>
-          </div>
+          {context.user && (
+            <div className="NavbarUser">
+              <a
+                href="#"
+                onClick={() => {
+                  // TODO:
+                  // history.push('/user/profile')
+                }}
+              >
+                {`${context.user?.name}(${context.user?.email})`}
+              </a>
+            </div>
+          )}
         </div>
       </div>
     </div>
