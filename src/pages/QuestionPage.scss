@@ -1,0 +1,9 @@
+@import "../scss/variables";
+
+.QuestionPage {
+  display: grid;
+
+  @media (min-width: $break-point) {
+    grid-template-columns: 3fr 1fr;
+  }
+}

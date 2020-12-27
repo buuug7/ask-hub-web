@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Answer, Pagination } from "../../app.interface";
-import { http } from "../../http";
-import AnswerComponent from "./Answer.component";
+import { Answer, Pagination } from "../app.interface";
+import { http } from "../http";
+import AnswerComponent from "./AnswerComponent";
 
 function AnswersComponent({ questionId }: { questionId: string }) {
   const [answers, setAnswers] = useState<Answer[]>([]);

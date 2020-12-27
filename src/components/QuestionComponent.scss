@@ -1,0 +1,31 @@
+@import "~rfs/scss";
+
+.QuestionComponent {
+  background-color: #fff;
+  padding: 1rem;
+
+  .title {
+    @include rfs("1.5rem", "font-size");
+    margin: 0 0 0.5rem 0;
+  }
+
+  .meta {
+    display: flex;
+    .user {
+      margin: 0 0.5rem 0 0;
+    }
+    .updatedAt {
+      @include rfs("1rem", "font-size");
+      opacity: 0.7;
+    }
+  }
+
+  .tags {
+    margin: 0.5rem 0;
+  }
+
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+}

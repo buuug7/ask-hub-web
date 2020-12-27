@@ -1,13 +1,14 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
-import { Answer } from "../../app.interface";
-import { http } from "../../http";
-import { Link } from "react-router-dom";
+import { Answer } from "../app.interface";
+import { http } from "../http";
+import { Link, useHistory } from "react-router-dom";
 import dayjs from "dayjs";
 
-import "./Answer.scss";
-import { AppContext } from "../../App";
+import "./AnswerComponent.scss";
+import { AppContext } from "../App";
 
 function AnswerComponent({ id }: { id: string }) {
+  const history = useHistory();
   const context = useContext(AppContext);
   const [answer, setAnswer] = useState<Answer>();
   const [starCount, setStarCount] = useState(0);
@@ -47,13 +48,21 @@ function AnswerComponent({ id }: { id: string }) {
   }, [checkIsStarByRequestUser]);
 
   return (
-    <div className="AnswerComponent mb-5">
-      <p>
-        Posted by <Link to={`/users/profile/${answer?.user?.email}`}>{answer?.user?.name}</Link> At{" "}
-        {dayjs(answer?.createdAt).format("YYYY/MM/DD HH:mm")}
-      </p>
-      <p>Last updated at {dayjs(answer?.updatedAt).format("YYYY/MM/DD HH:mm")}</p>
-      <p>{answer?.text}</p>
+    <div className="AnswerComponent mb-4">
+      <div className="meta">
+        <a
+          className="user"
+          onClick={() => {
+            history.push(`/users/profile/${answer?.user?.email}`);
+          }}
+        >
+          {answer?.user?.name}
+        </a>
+        <div className="updatedAt">
+          Last updated {dayjs(answer?.updatedAt).format("YYYY/MM/DD HH:mm")}
+        </div>
+      </div>
+      <div className="text">{answer?.text}</div>
       <div>
         <button
           disabled={context.user === null}

@@ -1,4 +1,3 @@
-
 export default function FormDemo() {
   return (
     <div>
@@ -12,7 +11,7 @@ export default function FormDemo() {
         <input type="file" className="FormControl" placeholder="some placeholder" />
       </p>
 
-      <br/>
+      <br />
     </div>
   );
 }

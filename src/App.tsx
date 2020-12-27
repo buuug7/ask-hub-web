@@ -4,7 +4,7 @@ import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 
 import LogoutComponent from "./components/LogoutComponent";
 import QuestionsComponent from "./components/questions/Questions.component";
-import QuestionComponent from "./components/questions/Question.component";
+import QuestionComponent from "./components/QuestionComponent";
 import UserProfileComponent from "./components/UserProfileComponent";
 import TagsComponent from "./components/TagsComponent";
 import FullScreenLoading from "./components/FullScreenLoading";

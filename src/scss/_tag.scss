@@ -1,0 +1,20 @@
+@import "~rfs/scss";
+@import "variables";
+
+.tags {
+  .item {
+    display: inline-block;
+    margin: 0 0.5rem 0.5rem 0;
+    text-decoration: none;
+    border: 1px solid #eee;
+    padding: 0.2rem 0.5rem;
+    @include rfs(1rem, "font-size");
+    transition: all 0.5s ease-in-out;
+    color: $blue;
+
+    &:hover {
+      border-color: #ccc;
+      text-decoration: none;
+    }
+  }
+}

@@ -27,7 +27,9 @@ function LoginPage() {
       <h2>Login to Askhub</h2>
       <form className="mt-4">
         <div className="mb-3">
-          <label htmlFor="email" className="FormLabel">Email</label>
+          <label htmlFor="email" className="FormLabel">
+            Email
+          </label>
           <input
             type="text"
             className="FormControl"
@@ -39,7 +41,9 @@ function LoginPage() {
         </div>
 
         <div className="mb-3">
-          <label htmlFor="password" className="FormLabel">password</label>
+          <label htmlFor="password" className="FormLabel">
+            password
+          </label>
           <input
             className="FormControl"
             type="text"
