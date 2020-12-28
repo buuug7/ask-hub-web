@@ -1,23 +1,20 @@
 import { createContext, useState } from "react";
-import "./App.scss";
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
-
 import LogoutComponent from "./components/LogoutComponent";
-import QuestionsComponent from "./components/questions/Questions.component";
-import QuestionComponent from "./components/QuestionComponent";
+import QuestionsComponent from "./components/QuestionsComponent";
 import UserProfileComponent from "./components/UserProfileComponent";
 import TagsComponent from "./components/TagsComponent";
 import FullScreenLoading from "./components/FullScreenLoading";
-
 import { AppContextInterface, User } from "./app.interface";
 import { getSessionUser } from "./util";
-import QuestionCreateComponent from "./components/questions/QuestionCreate.component";
+import QuestionCreateComponent from "./components/QuestionCreateComponent";
 import NavbarComponent from "./components/NavbarComponent";
 import UiIndex from "./pages/ui/Index";
 import LoginPage from "./pages/LoginPage";
 import HomePage from "./pages/HomePage";
-
 import QuestionPage from "./pages/QuestionPage";
+
+import "./App.scss";
 
 export const AppContext = createContext<AppContextInterface>({
   user: null,

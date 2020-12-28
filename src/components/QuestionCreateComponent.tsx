@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { http } from "../../http";
+import { http } from "../http";
 import ReactMde from "react-mde";
 import "react-mde/lib/styles/css/react-mde-all.css";
-import { ShowdownConverter } from "../../util";
-import { Tag } from "../../app.interface";
+import { ShowdownConverter } from "../util";
+import { Tag } from "../app.interface";
 
 function QuestionCreateComponent() {
   const [title, setTitle] = useState("");

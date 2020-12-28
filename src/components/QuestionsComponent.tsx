@@ -1,9 +1,9 @@
 import { useCallback, useContext, useEffect, useState } from "react";
-import { http } from "../../http";
-import { Pagination, Question } from "../../app.interface";
+import { http } from "../http";
+import { Pagination, Question } from "../app.interface";
 import { Link } from "react-router-dom";
-import { AppContext } from "../../App";
-import { to } from "../../util";
+import { AppContext } from "../App";
+import { to } from "../util";
 
 function QuestionsComponent() {
   const context = useContext(AppContext);
