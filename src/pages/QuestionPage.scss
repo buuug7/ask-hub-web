@@ -4,6 +4,6 @@
   display: grid;
 
   @media (min-width: $break-point) {
-    grid-template-columns: 3fr 1fr;
+    grid-template-columns: auto 300px;
   }
 }

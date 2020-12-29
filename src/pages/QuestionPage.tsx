@@ -8,7 +8,7 @@ export default function QuestionPage() {
 
   return (
     <div className="QuestionPage my-4">
-      <QuestionComponent id={id} />
+      <QuestionComponent id={id} showTags={true} showActions={true} defaultShowAnswers={true} />
     </div>
   );
 }

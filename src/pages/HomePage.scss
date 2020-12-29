@@ -1,8 +1,7 @@
+@import "../scss/variables";
+
 .HomePage {
   width: 100%;
-  display: grid;
-  grid-template-columns: 3fr 1fr;
-
   .HomePageTitle {
     font-size: 40px;
     font-weight: 300;
@@ -13,7 +12,11 @@
   }
 
   .HomePageLeft {
-    background-color: #fff;
-    padding: 1rem;
+  }
+
+  @media (min-width: $break-point) {
+    display: grid;
+    grid-template-columns: auto 300px;
+    grid-column-gap: 1rem;
   }
 }

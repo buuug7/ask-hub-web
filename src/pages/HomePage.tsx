@@ -2,26 +2,19 @@ import { http } from "../http";
 import { useCallback, useEffect, useState } from "react";
 import { to } from "../util";
 import { Question } from "../app.interface";
-
+import QuestionComponent from "../components/QuestionComponent";
+import TagsComponent from "../components/TagsComponent";
 import "./HomePage.scss";
-
-const question = {
-  title: "The purpose of the command",
-  description:
-    "You probably have heard of behavioral patterns by now. Behavioral patterns are concerned about the interaction of objects.",
-};
 
 function HomePage() {
   const [hotQuestions, setHotQuestions] = useState<Question[]>([]);
 
   const getHotQuestions = useCallback(async () => {
-    const [error, res] = await to(http.get("/questions/analysis/getByMostAnswers"));
+    const [error, res] = await to(http.get("/questions/analysis/getHotQuestions"));
     if (error) {
       console.log("Error: ", error);
       return;
     }
-
-    console.log("Res:", res);
     setHotQuestions(res?.data);
   }, []);
 
@@ -33,13 +26,20 @@ function HomePage() {
 
   return (
     <div className="HomePage mt-4">
-      <div className="HomePageLeft">
-        {[1, 2, 3, 4].map((item) => (
-          <div>
-            <div className="title">{question.title}</div>
-            <div className="description">{question.description}</div>
+      <div className="HomePageLeft mb-4">
+        <div className="title text-center">
+          <h2 className="">热门问题</h2>
+          <p className="">最近一个月回答数最多的前十个问题</p>
+        </div>
+        {hotQuestions.map((item) => (
+          <div className="mb-2" key={item.id}>
+            <QuestionComponent id={item.id} showActions={true} />
           </div>
         ))}
+      </div>
+
+      <div className="HomePageRight">
+        <TagsComponent />
       </div>
     </div>
   );

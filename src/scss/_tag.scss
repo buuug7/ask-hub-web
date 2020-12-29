@@ -2,11 +2,14 @@
 @import "variables";
 
 .tags {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  grid-gap: .5rem .5rem;
   .item {
+    text-align: center;
     display: inline-block;
-    margin: 0 0.5rem 0.5rem 0;
     text-decoration: none;
-    border: 1px solid #eee;
+    border: 1px solid #ddd;
     padding: 0.2rem 0.5rem;
     @include rfs(1rem, "font-size");
     transition: all 0.5s ease-in-out;

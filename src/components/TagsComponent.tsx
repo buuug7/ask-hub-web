@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Tag } from "../app.interface";
 import { http } from "../http";
+import './TagsComponent.scss'
 
 function TagsComponent() {
   const [tags, setTags] = useState<Tag[]>();
@@ -16,12 +17,17 @@ function TagsComponent() {
 
   return (
     <div className="TagsComponent">
-      <h4>All tags</h4>
-      <ul>
+      <div className="HeadLine">
+        <div className="title">分类</div>
+      </div>
+
+      <div className="tags">
         {tags?.map((item) => (
-          <li key={item.id}>{item.name}</li>
+          <span className="item" key={item.id}>
+            {item.name}
+          </span>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
