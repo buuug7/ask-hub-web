@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Tag } from "../app.interface";
 import { http } from "../http";
-import './TagsComponent.scss'
+import "./TagsComponent.scss";
 
 function TagsComponent() {
   const [tags, setTags] = useState<Tag[]>();

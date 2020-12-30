@@ -1,12 +1,13 @@
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { http } from "../http";
 import { Pagination, Question } from "../app.interface";
 import { Link } from "react-router-dom";
-import { AppContext } from "../App";
 import { to } from "../util";
+import { useSetRecoilState } from "recoil";
+import { loadingState } from "../app.state";
 
 function QuestionsComponent() {
-  const context = useContext(AppContext);
+  const setLoading = useSetRecoilState(loadingState);
   const [pagination, setPagination] = useState<Pagination<Question>>({
     meta: { total: 0, totalPage: 0, perPage: 10, currentPage: 1 },
     data: [],
@@ -33,9 +34,9 @@ function QuestionsComponent() {
   }, [pagination.meta.perPage, pagination.meta.currentPage]);
 
   useEffect(() => {
-    context.updateLoading(true);
+    setLoading(true);
     getQuestions().then((r) => {
-      context.updateLoading(false);
+      setLoading(false);
     });
   }, [getQuestions]); // eslint-disable-line react-hooks/exhaustive-deps
 

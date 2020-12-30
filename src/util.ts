@@ -6,6 +6,10 @@ export function getSessionUser() {
   return user ? JSON.parse(user) : null;
 }
 
+export function getUserToken() {
+  return sessionStorage.getItem("token");
+}
+
 /**
  * Async await wrapper for easy error handling
  * reference https://github.com/scopsy/await-to-js

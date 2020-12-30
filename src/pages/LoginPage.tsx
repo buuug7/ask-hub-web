@@ -1,13 +1,14 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { http } from "../http";
-import { AppContext } from "../App";
 import { useHistory } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import { userState } from "../app.state";
 
 function LoginPage() {
   const history = useHistory();
-  const context = useContext(AppContext);
   const [email, setEmail] = useState<string>("ask@dev.com");
   const [password, setPassword] = useState("123456");
+  const setUser = useSetRecoilState(userState);
 
   const login = async () => {
     const { data } = await http.post("/auth/login", {
@@ -20,8 +21,7 @@ function LoginPage() {
   const getUserInfo = async () => {
     const { data } = await http.get(`/users/profile/${email}`);
     sessionStorage.setItem("user", JSON.stringify(data));
-    context.updateUser(data);
-    console.log("userInfo", data);
+    setUser(data);
     history.push("/");
   };
 

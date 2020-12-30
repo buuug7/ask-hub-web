@@ -1,15 +1,16 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Answer } from "../app.interface";
 import { http } from "../http";
 import { Link, useHistory } from "react-router-dom";
 import dayjs from "dayjs";
 
 import "./AnswerComponent.scss";
-import { AppContext } from "../App";
+import { useRecoilValue } from "recoil";
+import { userState } from "../app.state";
 
 function AnswerComponent({ id }: { id: string }) {
   const history = useHistory();
-  const context = useContext(AppContext);
+  const user = useRecoilValue(userState);
   const [answer, setAnswer] = useState<Answer>();
   const [starCount, setStarCount] = useState(0);
   const [isStarByRequestUser, setIsStarByRequestUser] = useState(false);
@@ -35,7 +36,7 @@ function AnswerComponent({ id }: { id: string }) {
   }, [getAnswerStarCount]);
 
   const checkIsStarByRequestUser = useCallback(async () => {
-    if (!context.user) {
+    if (!user) {
       return;
     }
 
@@ -65,7 +66,7 @@ function AnswerComponent({ id }: { id: string }) {
       <div className="text">{answer?.text}</div>
       <div>
         <button
-          disabled={context.user === null}
+          disabled={user === null}
           onClick={async () => {
             await http.post(`/answers/${id}/toggleStar`);
             setStartToggleStar(Math.random);

@@ -1,12 +1,12 @@
 import { useHistory, useLocation } from "react-router-dom";
 import "./NavbarComponent.scss";
-import { AppContext } from "../App";
-import { useContext } from "react";
+import { useRecoilValue } from "recoil";
+import { userState } from "../app.state";
 
 function NavbarComponent() {
   const history = useHistory();
   const location = useLocation();
-  const context = useContext(AppContext);
+  const user = useRecoilValue(userState);
   const { pathname } = location;
 
   return (
@@ -66,7 +66,7 @@ function NavbarComponent() {
               UI
             </li>
           </ul>
-          {!context.user && (
+          {!user && (
             <button
               className="Button ButtonPrimary"
               onClick={() => {
@@ -77,7 +77,7 @@ function NavbarComponent() {
             </button>
           )}
 
-          {context.user && (
+          {user && (
             <div className="NavbarUser">
               <a
                 href="#"
@@ -85,7 +85,7 @@ function NavbarComponent() {
                   history.push("/logout");
                 }}
               >
-                {`${context.user?.name}(${context.user?.email})`}
+                {`${user?.name}(${user?.email})`}
               </a>
             </div>
           )}

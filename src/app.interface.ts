@@ -16,7 +16,7 @@ export interface User {
   id: string;
   name: string;
   email: string;
-  createdAt: string;
+  createdAt?: string;
 }
 
 export interface Question {
@@ -43,11 +43,4 @@ export interface Tag {
   id: string;
   name: string;
   slug: string;
-}
-
-export interface AppContextInterface {
-  user: User | null;
-  loading: boolean;
-  updateUser: Function;
-  updateLoading: Function;
 }

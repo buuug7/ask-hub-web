@@ -1,12 +1,9 @@
-import { createContext, useState } from "react";
-import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import LogoutComponent from "./components/LogoutComponent";
 import QuestionsComponent from "./components/QuestionsComponent";
 import UserProfileComponent from "./components/UserProfileComponent";
 import TagsComponent from "./components/TagsComponent";
 import FullScreenLoading from "./components/FullScreenLoading";
-import { AppContextInterface, User } from "./app.interface";
-import { getSessionUser } from "./util";
 import QuestionCreateComponent from "./components/QuestionCreateComponent";
 import NavbarComponent from "./components/NavbarComponent";
 import UiIndex from "./pages/ui/Index";
@@ -15,55 +12,48 @@ import HomePage from "./pages/HomePage";
 import QuestionPage from "./pages/QuestionPage";
 
 import "./App.scss";
+import { RecoilRoot, useRecoilValue } from "recoil";
+import { loadingState } from "./app.state";
 
-export const AppContext = createContext<AppContextInterface>({
-  user: null,
-  loading: false,
-  updateUser: () => {},
-  updateLoading: () => {},
-});
+function LoadingGlobal() {
+  const loading = useRecoilValue(loadingState);
+
+  if (!loading) {
+    return null;
+  }
+
+  return <FullScreenLoading />;
+}
+
+function AppBody() {
+  return (
+    <div className="container" style={{ maxWidth: "1200px" }}>
+      <Switch>
+        <Route exact path="/" children={<HomePage />} />
+        <Route exact path="/login" children={<LoginPage />} />
+        <Route exact path="/logout" children={<LogoutComponent />} />
+        <Route exact path="/questions" children={<QuestionsComponent />} />
+        <Route exact path="/questions/create" children={<QuestionCreateComponent />} />
+        <Route exact path="/questions/view/:id" children={<QuestionPage />} />
+        <Route exact path="/users/profile/:email" children={<UserProfileComponent />} />
+        <Route exact path="/tags" children={<TagsComponent />} />
+        <Route exact path="/ui" children={<UiIndex />} />
+      </Switch>
+    </div>
+  );
+}
 
 function App() {
-  const defaultUser = getSessionUser();
-  const [user, setUser] = useState<User>(defaultUser);
-  const [loading, setLoading] = useState<boolean>(false);
-
-  const contextValue = {
-    user,
-    loading,
-    updateUser: (user: User) => setUser(user),
-    updateLoading: (loading: boolean) => setLoading(loading),
-  };
-
-  /**
-   * 超时自动关闭 loading
-   */
-  setTimeout(() => {
-    setLoading(false);
-  }, 30000);
-
   return (
-    <AppContext.Provider value={contextValue}>
+    <RecoilRoot>
       <div className="App">
-        {loading && <FullScreenLoading />}
         <BrowserRouter>
+          <LoadingGlobal />
           <NavbarComponent />
-          <div className="container" style={{ maxWidth: "1200px" }}>
-            <Switch>
-              <Route exact path="/" children={<HomePage />} />
-              <Route exact path="/login" children={<LoginPage />} />
-              <Route exact path="/logout" children={<LogoutComponent />} />
-              <Route exact path="/questions" children={<QuestionsComponent />} />
-              <Route exact path="/questions/create" children={<QuestionCreateComponent />} />
-              <Route exact path="/questions/view/:id" children={<QuestionPage />} />
-              <Route exact path="/users/profile/:email" children={<UserProfileComponent />} />
-              <Route exact path="/tags" children={<TagsComponent />} />
-              <Route exact path="/ui" children={<UiIndex />} />
-            </Switch>
-          </div>
+          <AppBody />
         </BrowserRouter>
       </div>
-    </AppContext.Provider>
+    </RecoilRoot>
   );
 }
 

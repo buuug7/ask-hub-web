@@ -1,14 +1,13 @@
 import axios from "axios";
 import { BASE_URL } from "./config";
-
-const getToken = () => sessionStorage.getItem("token");
+import { getUserToken } from "./util";
 
 export const http = axios.create({
   baseURL: BASE_URL,
   timeout: 1000 * 30,
   headers: {
     "content-type": "application/json; charset=utf-8",
-    Authorization: `Bearer ${getToken()}`,
+    Authorization: `Bearer ${getUserToken()}`,
   },
 });
 
