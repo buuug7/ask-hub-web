@@ -71,7 +71,7 @@ function AnswerComponent({ id }: { id: string }) {
             await http.post(`/answers/${id}/toggleStar`);
             setStartToggleStar(Math.random);
           }}
-          className={isStarByRequestUser ? "Button ButtonPrimary" : "Button"}
+          className={isStarByRequestUser ? "btn primary" : "btn"}
         >
           {isStarByRequestUser ? "unStar" : "star"} ({starCount})
         </button>

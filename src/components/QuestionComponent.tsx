@@ -5,8 +5,9 @@ import dayjs from "dayjs";
 import AnswersComponent from "./AnswersComponent";
 import { ShowdownConverter } from "../util";
 import { useHistory } from "react-router-dom";
-import "./QuestionComponent.scss";
 import { ReactComponent as PencilIcon } from "bootstrap-icons/icons/pencil-fill.svg";
+import SkeletonComponent from "./SkeletonComponent";
+import "./QuestionComponent.scss";
 
 type QuestionComponentProps = {
   id: string;
@@ -39,7 +40,7 @@ function QuestionComponent({
   }, [getQuestion]);
 
   if (!question) {
-    return <div>Loading</div>;
+    return <SkeletonComponent type="v2" />;
   }
 
   return (
@@ -84,7 +85,7 @@ function QuestionComponent({
       {showActions && (
         <div className="actions">
           <button
-            className={`Button ${showAnswers ? "ButtonPrimary" : ""} mr-2`}
+            className={`btn ${showAnswers ? "primary" : ""} mr-2`}
             onClick={() => {
               setShowAnswers((prevState) => {
                 return !prevState;
@@ -93,8 +94,8 @@ function QuestionComponent({
           >
             {question.answersCount} 个回答
           </button>
-          <button className="Button mr-2">关注</button>
-          <button className="Button display-inline-flex justify-content-center align-items-center">
+          <button className="btn mr-2">关注</button>
+          <button className="btn display-inline-flex justify-content-center align-items-center">
             <PencilIcon className="mr-1" /> 写回答
           </button>
         </div>

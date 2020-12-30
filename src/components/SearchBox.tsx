@@ -4,9 +4,9 @@ import "./SearchBox.scss";
 export default function SearchBox() {
   return (
     <div className="SearchBox mb-4">
-      <div className="InputGroup box-shadow1">
-        <input className="FormControl" type="text" placeholder="Search Askhub" />
-        <button className="Button ButtonPrimary">
+      <div className="inputGroup box-shadow1">
+        <input className="formControl" type="text" placeholder="Search Askhub" />
+        <button className="btn primary">
           <SearchIcon />
         </button>
       </div>

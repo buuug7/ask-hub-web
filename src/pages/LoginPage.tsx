@@ -30,12 +30,12 @@ function LoginPage() {
       <h2>Login to Askhub</h2>
       <form className="mt-4">
         <div className="mb-3">
-          <label htmlFor="email" className="FormLabel">
+          <label htmlFor="email" className="formLabel">
             Email
           </label>
           <input
             type="text"
-            className="FormControl"
+            className="formControl"
             value={email}
             id="email"
             placeholder="Email"
@@ -44,11 +44,11 @@ function LoginPage() {
         </div>
 
         <div className="mb-3">
-          <label htmlFor="password" className="FormLabel">
+          <label htmlFor="password" className="formLabel">
             password
           </label>
           <input
-            className="FormControl"
+            className="formControl"
             type="text"
             value={password}
             placeholder="Password"
@@ -57,7 +57,7 @@ function LoginPage() {
         </div>
 
         <button
-          className="Button ButtonPrimary"
+          className="btn primary"
           type="submit"
           onClick={async (e) => {
             e.preventDefault();

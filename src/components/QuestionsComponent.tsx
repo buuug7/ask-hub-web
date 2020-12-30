@@ -51,6 +51,7 @@ function QuestionsComponent() {
       </ul>
 
       <button
+        className="btn"
         onClick={async () => {
           if (pagination.meta.currentPage < pagination.meta.totalPage) {
             setPagination((prevState) => {

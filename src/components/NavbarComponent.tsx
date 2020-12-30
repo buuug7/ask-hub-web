@@ -36,7 +36,7 @@ function NavbarComponent() {
         </button>
         <div className="NavBarCollapse">
           <div className="NavBarSearch">
-            <input className="FormControl" type="text" placeholder="Search Askhub" />
+            <input className="formControl" type="text" placeholder="Search Askhub" />
           </div>
           <ul className="NavbarNav">
             <li
@@ -68,7 +68,7 @@ function NavbarComponent() {
           </ul>
           {!user && (
             <button
-              className="Button ButtonPrimary"
+              className="btn primary"
               onClick={() => {
                 history.push("/login");
               }}

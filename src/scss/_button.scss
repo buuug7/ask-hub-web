@@ -1,7 +1,7 @@
 @import "variables";
 @import "~rfs/scss";
 
-.Button {
+.btn {
   display: inline-block;
   line-height: 1.5;
   color: $gray-900;
@@ -39,7 +39,7 @@
   }
 }
 
-.Button.ButtonPrimary {
+.btn.primary {
   color: $white;
   background-color: $blue;
   border-color: $blue;
