@@ -4,13 +4,16 @@ import ReactMde from "react-mde";
 import "react-mde/lib/styles/css/react-mde-all.css";
 import { ShowdownConverter } from "../util";
 import { Tag } from "../app.interface";
+import Select from "react-select";
+
+import "./QuestionCreateComponent.scss";
 
 function QuestionCreateComponent() {
   const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("some description");
+  const [description, setDescription] = useState("问题的描述，可选");
   const [selectedTab, setSelectedTab] = useState<"write" | "preview">("write");
   const [tags, setTags] = useState<Tag[]>([]);
-  const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
+  const [selectedTags, setSelectedTags] = useState(null);
 
   useEffect(() => {
     async function getTags() {
@@ -24,18 +27,21 @@ function QuestionCreateComponent() {
     });
   }, []);
 
+  console.log("selecteTags", selectedTags);
+
   return (
     <div className="QuestionCreateComponent">
-      <h4>Create new question</h4>
+      <h4>创建一个问题</h4>
       <div>
         <form>
           <div className="formGroup mb-2">
             <input
+              className="formControl"
               type="text"
               id="title"
               name="title"
               value={title}
-              placeholder="please input question title"
+              placeholder="请填写问题的简要标题"
               autoComplete="off"
               style={{ width: "100%" }}
               onChange={(e) => {
@@ -43,6 +49,7 @@ function QuestionCreateComponent() {
               }}
             />
           </div>
+
           <div className="formGroup mb-2">
             <ReactMde
               value={description}
@@ -55,37 +62,43 @@ function QuestionCreateComponent() {
             />
           </div>
 
-          <div className="formGroup">
-            <label htmlFor="">Tags</label>
-            <div>
-              {tags.map((item) => (
-                <label key={item.id} className="mr-2">
-                  {item.name}
-                  <input
-                    type="checkbox"
-                    value={item.name}
-                    onChange={(e) => {
-                      const checked = e.target.checked;
-                      if (checked) {
-                        setSelectedTags([...selectedTags, item]);
-                      } else {
-                        const _tags = selectedTags.filter((it) => it.id === item.id);
-                        setSelectedTags(_tags);
-                      }
-                    }}
-                  />
-                </label>
-              ))}
-            </div>
+          <div className="formGroup mb-2">
+            <Select
+              placeholder="请添加标签，可选"
+              value={selectedTags}
+              // @ts-ignore
+              onChange={setSelectedTags}
+              options={tags}
+              // @ts-ignore
+              getOptionLabel={(option) => option.name}
+              getOptionValue={(option) => option.slug}
+              isMulti={true}
+            />
           </div>
+
           <button
             className="btn primary"
             onClick={async (e) => {
               e.preventDefault();
+
+              if (!title) {
+                alert("请填写标题");
+                return;
+              }
+
+              let tags = selectedTags
+                ? // @ts-ignore
+                  selectedTags.map((item) => {
+                    return {
+                      id: item.id,
+                    };
+                  })
+                : [];
+
               await http.post("/questions", {
                 title: title,
                 description: description,
-                tags: selectedTags,
+                tags: tags,
               });
             }}
           >
