@@ -2,6 +2,7 @@ import { useHistory, useLocation } from "react-router-dom";
 import "./NavbarComponent.scss";
 import { useRecoilValue } from "recoil";
 import { userState } from "../app.state";
+import { ReactComponent as BellFillIcon } from "bootstrap-icons/icons/bell.svg";
 
 function NavbarComponent() {
   const history = useHistory();
@@ -10,15 +11,15 @@ function NavbarComponent() {
   const { pathname } = location;
 
   return (
-    <div className="Navbar dark">
+    <div className="navbar dark">
       <div className="container">
-        <a href="/" className="NavbarBrand">
+        <a href="/" className="brand">
           Askhub
         </a>
         <button
-          className="NavbarToggleBtn"
+          className="toggleBtn"
           onClick={() => {
-            const collapseDom = document.querySelector(".Navbar .NavBarCollapse");
+            const collapseDom = document.querySelector(".navbar .collapse");
             if (collapseDom) {
               const displayNone = window.getComputedStyle(collapseDom).display === "none";
 
@@ -32,15 +33,15 @@ function NavbarComponent() {
             }
           }}
         >
-          <span className="NavBarToggleIcon" />
+          <span className="toggleIcon" />
         </button>
-        <div className="NavBarCollapse">
-          <div className="NavBarSearch">
+        <div className="collapse">
+          <div className="search">
             <input className="formControl" type="text" placeholder="Search Askhub" />
           </div>
-          <ul className="NavbarNav">
+          <ul className="nav">
             <li
-              className={pathname === "/questions" ? "NavbarNavItem active" : "NavbarNavItem"}
+              className={pathname === "/questions" ? "navItem active" : "navItem"}
               onClick={() => {
                 history.push("/questions");
               }}
@@ -48,9 +49,7 @@ function NavbarComponent() {
               发现
             </li>
             <li
-              className={
-                pathname === "/questions/create" ? "NavbarNavItem active" : "NavbarNavItem"
-              }
+              className={pathname === "/questions/create" ? "navItem active" : "navItem"}
               onClick={() => {
                 history.push("/questions/create");
               }}
@@ -58,7 +57,7 @@ function NavbarComponent() {
               提问
             </li>
             <li
-              className={pathname === "/ui" ? "NavbarNavItem active" : "NavbarNavItem"}
+              className={pathname === "/ui" ? "navItem active" : "navItem"}
               onClick={() => {
                 history.push("/ui");
               }}
@@ -66,29 +65,35 @@ function NavbarComponent() {
               UI
             </li>
           </ul>
-          {!user && (
-            <button
-              className="btn primary"
-              onClick={() => {
-                history.push("/login");
-              }}
-            >
-              login
-            </button>
-          )}
 
-          {user && (
-            <div className="NavbarUser">
-              <a
-                href="#"
+          <div className="more">
+            {!user && (
+              <button
+                className="btn primary"
                 onClick={() => {
-                  history.push("/logout");
+                  history.push("/login");
                 }}
               >
-                {`${user?.name}(${user?.email})`}
-              </a>
-            </div>
-          )}
+                login
+              </button>
+            )}
+
+            {user && (
+              <>
+                <a className="notifications">
+                  <BellFillIcon />
+                </a>
+                <a
+                  href="#"
+                  onClick={() => {
+                    history.push("/logout");
+                  }}
+                >
+                  {`${user?.name}(${user?.email})`}
+                </a>
+              </>
+            )}
+          </div>
         </div>
       </div>
     </div>

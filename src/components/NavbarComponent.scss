@@ -1,6 +1,6 @@
 @import "../scss/variables";
 
-.Navbar {
+.navbar {
   position: relative;
   display: flex;
   flex-wrap: wrap;
@@ -22,7 +22,7 @@
     padding-right: 0.75rem;
   }
 
-  .NavbarBrand {
+  .brand {
     padding-top: 0.3125rem;
     padding-bottom: 0.3125rem;
     margin-right: 1rem;
@@ -31,7 +31,7 @@
     white-space: nowrap;
   }
 
-  .NavbarToggleBtn {
+  .toggleBtn {
     padding: 0.25rem 0.75rem;
     font-size: 1.25rem;
     line-height: 1;
@@ -46,7 +46,7 @@
       box-shadow: 0 0 0 0.25rem;
     }
 
-    .NavBarToggleIcon {
+    .toggleIcon {
       background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280, 0, 0, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
       display: inline-block;
       width: 1.5em;
@@ -58,16 +58,17 @@
     }
   }
 
-  .NavBarCollapse {
+  .collapse {
     width: 100%;
     display: none;
   }
 
-  .NavBarSearch {
+  .search {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 1rem;
+
     .formControl {
       background-color: $black;
       border: 1px solid #444d56;
@@ -82,7 +83,7 @@
     }
   }
 
-  .NavbarNav {
+  .nav {
     display: flex;
     flex-direction: column;
     padding-left: 0;
@@ -91,108 +92,139 @@
     margin-right: auto;
   }
 
-  .NavbarNavItem {
+  .navItem {
     display: block;
     padding: 0.5rem 0;
     text-decoration: none;
     cursor: pointer;
   }
 
-  .NavbarUser {
+  .more {
     display: flex;
+    flex-direction: column;
     justify-content: left;
-    align-items: center;
+    align-items: flex-start;
     padding: 0.5rem 0;
+
+    .notifications {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
     > a {
-      color: #fff;
+      display: block;
+      padding: 0.5rem 0;
+      text-decoration: none;
+      cursor: pointer;
     }
   }
 }
 
 @media (min-width: $break-point) {
-  .Navbar {
+  .navbar {
     flex-wrap: nowrap;
     justify-content: flex-start;
 
-    .NavbarToggleBtn {
+    .toggleBtn {
       display: none;
     }
 
-    .NavBarCollapse {
+    .collapse {
       display: flex !important;
 
-      .NavbarNav {
+      .nav {
         flex-direction: row;
       }
 
-      .NavbarNavItem {
+      .navItem {
         padding-right: 0.5rem;
         padding-left: 0.5rem;
       }
     }
 
-    .NavBarSearch {
+    .search {
       margin-right: 1rem;
       margin-top: 0;
+      .formControl {
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, width 0.2s ease;
+        width: 10rem;
+        &:focus {
+          color: $gray-900;
+          background-color: $white;
+          border: none;
+          box-shadow: none;
+          width: 300px;
+        }
+      }
     }
-    .NavBarSearch .formControl {
-      transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, width 0.2s ease;
-      width: 10rem;
-      &:focus {
-        color: $gray-900;
-        background-color: $white;
-        border: none;
-        box-shadow: none;
-        width: 300px;
+
+    .more {
+      flex-direction: row;
+      padding: 0;
+      justify-content: center;
+      align-items: center;
+      > * {
+        margin-left: 0.5rem;
       }
     }
   }
 }
 
 // light theme
-.Navbar.light {
+.navbar.light {
   background-color: $light;
 
-  .NavbarToggleBtn {
+  .toggleBtn {
     color: rgba(0, 0, 0, 0.55);
     border-color: rgba(0, 0, 0, 0.1);
   }
 
-  .NavbarNavItem {
+  .navItem {
     color: rgba(0, 0, 0, 0.55);
 
     &.active {
       color: rgba(0, 0, 0, 0.9);
     }
   }
+
+  .search {
+    .formControl {
+      background-color: #fff;
+      &:focus {
+        border: 1px solid #444d56;
+      }
+    }
+  }
 }
 
 // dark theme
-.Navbar.dark {
+.navbar.dark {
   background-color: $black;
-  .NavbarBrand {
+  .brand {
     color: #fff;
   }
 
-  .NavbarToggleBtn {
+  .toggleBtn {
     color: rgba(255, 255, 255, 0.55);
     border-color: rgba(255, 255, 255, 0.1);
   }
 
-  .NavBarToggleIcon {
+  .toggleIcon {
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
   }
 
-  .NavbarNavItem {
+  .navItem {
     color: rgba(255, 255, 255, 0.5);
 
     &.active {
       color: $gray-100;
     }
   }
-}
 
-// dark blue theme
-.Navbar.dark.blue {
-  background-color: $blue;
+  .more {
+    > a {
+      color: rgba(255, 255, 255, 0.5);
+    }
+  }
 }
