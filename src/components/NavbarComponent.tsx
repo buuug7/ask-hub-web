@@ -3,6 +3,7 @@ import "./NavbarComponent.scss";
 import { useRecoilValue } from "recoil";
 import { userState } from "../app.state";
 import { ReactComponent as BellFillIcon } from "bootstrap-icons/icons/bell.svg";
+import { ReactComponent as SearchIcon } from "bootstrap-icons/icons/search.svg";
 
 function NavbarComponent() {
   const history = useHistory();
@@ -37,6 +38,7 @@ function NavbarComponent() {
         </button>
         <div className="collapse">
           <div className="search">
+            <SearchIcon className="icon" />
             <input className="formControl" type="text" placeholder="Search Askhub" />
           </div>
           <ul className="nav">

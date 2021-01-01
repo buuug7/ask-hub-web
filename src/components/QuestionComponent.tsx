@@ -5,7 +5,7 @@ import dayjs from "dayjs";
 import AnswersComponent from "./AnswersComponent";
 import { ShowdownConverter } from "../util";
 import { useHistory } from "react-router-dom";
-import { ReactComponent as PencilIcon } from "bootstrap-icons/icons/pencil-fill.svg";
+import { ReactComponent as PencilIcon } from "bootstrap-icons/icons/pencil.svg";
 import SkeletonComponent from "./SkeletonComponent";
 import "./QuestionComponent.scss";
 
