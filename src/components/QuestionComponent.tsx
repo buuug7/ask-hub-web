@@ -8,6 +8,9 @@ import { useHistory } from "react-router-dom";
 import { ReactComponent as PencilIcon } from "bootstrap-icons/icons/pencil.svg";
 import SkeletonComponent from "./SkeletonComponent";
 import "./QuestionComponent.scss";
+import ReactMde from "react-mde";
+import { useRecoilValue } from "recoil";
+import { userState } from "../app.state";
 
 type QuestionComponentProps = {
   id: string;
@@ -25,6 +28,12 @@ function QuestionComponent({
   const history = useHistory();
   const [question, setQuestion] = useState<Question>();
   const [showAnswers, setShowAnswers] = useState(false);
+  const [showCreateAnswer, setShowCreateAnswer] = useState(false);
+  const [selectedTab, setSelectedTab] = useState<"write" | "preview">("write");
+  const [createAnswerText, setCreateAnswerText] = useState("");
+  const user = useRecoilValue(userState);
+
+  console.log("user,", user);
 
   const getQuestion = useCallback(async () => {
     const { data } = await http.get("/questions/" + id);
@@ -95,9 +104,49 @@ function QuestionComponent({
             {question.answersCount} 个回答
           </button>
           <button className="btn mr-2">关注</button>
-          <button className="btn display-inline-flex justify-content-center align-items-center">
+          <button
+            className={`btn ${
+              showCreateAnswer ? "primary" : ""
+            }  display-inline-flex justify-content-center align-items-center`}
+            onClick={() => {
+              setShowCreateAnswer((prevState) => !prevState);
+            }}
+          >
             <PencilIcon className="mr-1" /> 写回答
           </button>
+        </div>
+      )}
+
+      {showCreateAnswer && (
+        <div className="create-answer mt-2">
+          <div className="mb-2">
+            <a href="#">{user?.email}</a>
+          </div>
+          <ReactMde
+            value={createAnswerText}
+            onChange={setCreateAnswerText}
+            selectedTab={selectedTab}
+            onTabChange={setSelectedTab}
+            generateMarkdownPreview={(markdown) =>
+              Promise.resolve(ShowdownConverter.makeHtml(markdown))
+            }
+          />
+          <div className="mt-2">
+            <button
+              className="btn primary"
+              onClick={async () => {
+                const data = {
+                  text: createAnswerText,
+                  question: {
+                    id: id,
+                  },
+                };
+                await http.post("/answers", data);
+              }}
+            >
+              提交
+            </button>
+          </div>
         </div>
       )}
 

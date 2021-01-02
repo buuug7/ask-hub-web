@@ -1,12 +1,12 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Answer } from "../app.interface";
 import { http } from "../http";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import dayjs from "dayjs";
-
-import "./AnswerComponent.scss";
 import { useRecoilValue } from "recoil";
 import { userState } from "../app.state";
+import { ShowdownConverter } from "../util";
+import "./AnswerComponent.scss";
 
 function AnswerComponent({ id }: { id: string }) {
   const history = useHistory();
@@ -14,7 +14,6 @@ function AnswerComponent({ id }: { id: string }) {
   const [answer, setAnswer] = useState<Answer>();
   const [starCount, setStarCount] = useState(0);
   const [isStarByRequestUser, setIsStarByRequestUser] = useState(false);
-
   const [startToggleStar, setStartToggleStar] = useState(Math.random);
 
   const getAnswer = useCallback(async () => {
@@ -48,6 +47,10 @@ function AnswerComponent({ id }: { id: string }) {
     checkIsStarByRequestUser().then(() => {});
   }, [checkIsStarByRequestUser]);
 
+  if (!answer) {
+    return <div>loading</div>;
+  }
+
   return (
     <div className="AnswerComponent mb-4">
       <div className="meta">
@@ -63,7 +66,12 @@ function AnswerComponent({ id }: { id: string }) {
           Last updated {dayjs(answer?.updatedAt).format("YYYY/MM/DD HH:mm")}
         </div>
       </div>
-      <div className="text">{answer?.text}</div>
+      <div
+        className="text"
+        dangerouslySetInnerHTML={{
+          __html: ShowdownConverter.makeHtml(answer?.text),
+        }}
+      />
       <div>
         <button
           disabled={user === null}
