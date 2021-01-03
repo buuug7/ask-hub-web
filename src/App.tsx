@@ -12,10 +12,12 @@ import HomePage from "./pages/HomePage";
 import QuestionPage from "./pages/QuestionPage";
 
 import "./App.scss";
-import { RecoilRoot, useRecoilValue } from "recoil";
-import { loadingState } from "./app.state";
+import { RecoilRoot, useRecoilState, useRecoilValue } from "recoil";
+import { loadingState, snackbarTextState } from "./app.state";
+import Snackbar from "./components/Snackbar";
+import { useEffect, useState } from "react";
 
-function LoadingGlobal() {
+function FullScreenLoadingWrap() {
   const loading = useRecoilValue(loadingState);
 
   if (!loading) {
@@ -23,6 +25,26 @@ function LoadingGlobal() {
   }
 
   return <FullScreenLoading />;
+}
+
+function SnackbarWrap() {
+  const [text, setText] = useRecoilState(snackbarTextState);
+
+  useEffect(() => {
+    if (!text) {
+      return;
+    }
+
+    const snackbarDom = document.querySelector(".snackbar");
+    snackbarDom?.classList.add("show");
+    setTimeout(() => {
+      if (snackbarDom) {
+        snackbarDom.classList.remove("show");
+      }
+    }, 3000);
+  });
+
+  return <Snackbar text={text} />;
 }
 
 function AppBody() {
@@ -48,9 +70,10 @@ function App() {
     <RecoilRoot>
       <div className="App">
         <BrowserRouter>
-          <LoadingGlobal />
+          <FullScreenLoadingWrap />
           <NavbarComponent />
           <AppBody />
+          <SnackbarWrap />
         </BrowserRouter>
       </div>
     </RecoilRoot>
