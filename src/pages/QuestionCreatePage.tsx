@@ -4,7 +4,9 @@ import "./QuestionCreatePage.scss";
 function QuestionCreatePage() {
   return (
     <div className="QuestionCreatePage pt-4">
-      <QuestionCreateComponent />
+      <div className="createPanel">
+        <QuestionCreateComponent />
+      </div>
 
       <div>
         <h4>如何提出一个好问题？</h4>
