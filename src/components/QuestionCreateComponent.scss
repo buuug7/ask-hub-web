@@ -1,4 +1,10 @@
 @import "../scss/variables";
+@import "~rfs/scss";
 
 .QuestionCreateComponent {
+  .tips {
+    opacity: 0.7;
+    margin-bottom: 5px;
+    @include rfs(.9rem, "font-size");
+  }
 }

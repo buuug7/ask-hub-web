@@ -1,0 +1,10 @@
+@import "../scss/variables";
+
+.QuestionCreatePage {
+  display: grid;
+  grid-gap: 1rem;
+
+  @media (min-width: $break-point) {
+    grid-template-columns: auto 300px;
+  }
+}

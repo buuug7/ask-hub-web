@@ -15,6 +15,7 @@ import SnackbarWrap from "./components/Snackbar";
 import "./App.scss";
 import { RecoilRoot, useRecoilValue } from "recoil";
 import { loadingState } from "./app.state";
+import QuestionCreatePage from "./pages/QuestionCreatePage";
 
 function FullScreenLoadingWrap() {
   const loading = useRecoilValue(loadingState);
@@ -34,7 +35,7 @@ function AppBody() {
         <Route exact path="/login" children={<LoginPage />} />
         <Route exact path="/logout" children={<LogoutComponent />} />
         <Route exact path="/questions" children={<QuestionsComponent />} />
-        <Route exact path="/questions/create" children={<QuestionCreateComponent />} />
+        <Route exact path="/questions/create" children={<QuestionCreatePage />} />
         <Route exact path="/questions/view/:id" children={<QuestionPage />} />
         <Route exact path="/users/profile/:email" children={<UserProfileComponent />} />
         <Route exact path="/tags" children={<TagsComponent />} />
