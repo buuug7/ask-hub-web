@@ -1,0 +1,25 @@
+@import "../scss/variables";
+
+.LoginPage {
+  display: grid;
+
+  @media (min-width: $break-point) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .login-wrap {
+    background-color: #fff;
+    padding: 1rem;
+  }
+
+  .tips {
+    margin-bottom: 5px;
+    text-decoration: none;
+  }
+
+  svg.bi {
+    font-size: 1.5rem !important;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
