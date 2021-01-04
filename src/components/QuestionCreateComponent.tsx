@@ -5,6 +5,7 @@ import "react-mde/lib/styles/css/react-mde-all.css";
 import { ShowdownConverter } from "../util";
 import { Tag } from "../app.interface";
 import Select from "react-select";
+import SnackSubject from "../snackbar-subject";
 
 import "./QuestionCreateComponent.scss";
 
@@ -82,7 +83,7 @@ function QuestionCreateComponent() {
               e.preventDefault();
 
               if (!title) {
-                alert("请填写标题");
+                SnackSubject.next("请填写标题");
                 return;
               }
 

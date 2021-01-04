@@ -3,19 +3,18 @@ import LogoutComponent from "./components/LogoutComponent";
 import QuestionsComponent from "./components/QuestionsComponent";
 import UserProfileComponent from "./components/UserProfileComponent";
 import TagsComponent from "./components/TagsComponent";
-import FullScreenLoading from "./components/FullScreenLoading";
+import FullScreenLoading from "./components/FullScreenLoading/Index";
 import QuestionCreateComponent from "./components/QuestionCreateComponent";
 import NavbarComponent from "./components/NavbarComponent";
 import UiIndex from "./pages/ui/Index";
 import LoginPage from "./pages/LoginPage";
 import HomePage from "./pages/HomePage";
 import QuestionPage from "./pages/QuestionPage";
+import SnackbarWrap from "./components/Snackbar";
 
 import "./App.scss";
-import { RecoilRoot, useRecoilState, useRecoilValue } from "recoil";
-import { loadingState, snackbarTextState } from "./app.state";
-import Snackbar from "./components/Snackbar";
-import { useEffect, useState } from "react";
+import { RecoilRoot, useRecoilValue } from "recoil";
+import { loadingState } from "./app.state";
 
 function FullScreenLoadingWrap() {
   const loading = useRecoilValue(loadingState);
@@ -25,26 +24,6 @@ function FullScreenLoadingWrap() {
   }
 
   return <FullScreenLoading />;
-}
-
-function SnackbarWrap() {
-  const [text, setText] = useRecoilState(snackbarTextState);
-
-  useEffect(() => {
-    if (!text) {
-      return;
-    }
-
-    const snackbarDom = document.querySelector(".snackbar");
-    snackbarDom?.classList.add("show");
-    setTimeout(() => {
-      if (snackbarDom) {
-        snackbarDom.classList.remove("show");
-      }
-    }, 3000);
-  });
-
-  return <Snackbar text={text} />;
 }
 
 function AppBody() {

@@ -9,8 +9,9 @@ import { ReactComponent as PencilIcon } from "bootstrap-icons/icons/pencil.svg";
 import SkeletonComponent from "./SkeletonComponent";
 import "./QuestionComponent.scss";
 import ReactMde from "react-mde";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { snackbarTextState, userState } from "../app.state";
+import { useRecoilValue } from "recoil";
+import { userState } from "../app.state";
+import SnackbarSubject from "../snackbar-subject";
 
 type QuestionComponentProps = {
   id: string;
@@ -32,7 +33,6 @@ function QuestionComponent({
   const [selectedTab, setSelectedTab] = useState<"write" | "preview">("write");
   const [createAnswerText, setCreateAnswerText] = useState("");
   const user = useRecoilValue(userState);
-  const setSnackbarText = useSetRecoilState(snackbarTextState);
 
   console.log("user,", user);
 
@@ -111,8 +111,7 @@ function QuestionComponent({
             }  display-inline-flex justify-content-center align-items-center`}
             onClick={() => {
               if (!user) {
-                setSnackbarText("请先登录" + new Date().getTime());
-                return;
+                SnackbarSubject.next("请先登录");
               }
               setShowCreateAnswer((prevState) => !prevState);
             }}
