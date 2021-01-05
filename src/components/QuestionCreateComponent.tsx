@@ -1,15 +1,13 @@
 import { useEffect, useState } from "react";
 import { http } from "../http";
-import ReactMde from "react-mde";
-import "react-mde/lib/styles/css/react-mde-all.css";
-import { ShowdownConverter } from "../util";
 import { Tag } from "../app.interface";
 import Select from "react-select";
 import SnackSubject from "../snackbar-subject";
-
-import "./QuestionCreateComponent.scss";
 import { useRecoilValue } from "recoil";
 import { userState } from "../app.state";
+import ReactMdeWrap from "./ReactMdeWrap";
+
+import "./QuestionCreateComponent.scss";
 
 function QuestionCreateComponent() {
   const [title, setTitle] = useState("");
@@ -57,14 +55,11 @@ function QuestionCreateComponent() {
         <div className="formGroup mb-3">
           <label className="formLabel">描述</label>
           <p className="tips">可选，尽可能提供回答您问题所需的各种信息</p>
-          <ReactMde
+          <ReactMdeWrap
             value={description}
             onChange={setDescription}
             selectedTab={selectedTab}
             onTabChange={setSelectedTab}
-            generateMarkdownPreview={(markdown) =>
-              Promise.resolve(ShowdownConverter.makeHtml(markdown))
-            }
           />
         </div>
 

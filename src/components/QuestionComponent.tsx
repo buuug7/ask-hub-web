@@ -7,11 +7,12 @@ import { ShowdownConverter } from "../util";
 import { useHistory } from "react-router-dom";
 import { ReactComponent as PencilIcon } from "bootstrap-icons/icons/pencil.svg";
 import SkeletonComponent from "./SkeletonComponent";
-import "./QuestionComponent.scss";
-import ReactMde from "react-mde";
 import { useRecoilValue } from "recoil";
 import { userState } from "../app.state";
 import SnackbarSubject from "../snackbar-subject";
+import ReactMdeWrap from "./ReactMdeWrap";
+
+import "./QuestionComponent.scss";
 
 type QuestionComponentProps = {
   id: string;
@@ -126,14 +127,11 @@ function QuestionComponent({
           <div className="mb-2">
             <a href="#">{user?.email}</a>
           </div>
-          <ReactMde
+          <ReactMdeWrap
             value={createAnswerText}
             onChange={setCreateAnswerText}
             selectedTab={selectedTab}
             onTabChange={setSelectedTab}
-            generateMarkdownPreview={(markdown) =>
-              Promise.resolve(ShowdownConverter.makeHtml(markdown))
-            }
           />
           <div className="mt-2">
             <button
