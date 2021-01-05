@@ -28,7 +28,7 @@ function HomePage() {
     <div className="HomePage mt-4">
       <div className="HomePageLeft mb-4">
         <div className="title text-center">
-          <h2 className="">热门问题</h2>
+          <h4 className="">热门问题</h4>
           <p className="">最近一个月回答数最多的前十个问题</p>
         </div>
         {hotQuestions.map((item) => (

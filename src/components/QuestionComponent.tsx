@@ -146,6 +146,9 @@ function QuestionComponent({
                   },
                 };
                 await http.post("/answers", data);
+                setShowCreateAnswer(false);
+                SnackbarSubject.next("成功提交");
+                setShowAnswers(false);
               }}
             >
               提交
