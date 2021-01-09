@@ -61,7 +61,7 @@ function LoginPage() {
           </div>
 
           <div className="mb-3">
-            <a href="#" className="tips">
+            <a href="#!" className="tips">
               忘记密码？
             </a>
           </div>

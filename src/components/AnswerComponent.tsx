@@ -55,6 +55,7 @@ function AnswerComponent({ id }: { id: string }) {
     <div className="AnswerComponent mb-4">
       <div className="meta">
         <a
+          href="#!"
           className="user"
           onClick={() => {
             history.push(`/users/profile/${answer?.user?.email}`);

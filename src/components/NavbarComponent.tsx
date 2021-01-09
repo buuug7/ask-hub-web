@@ -82,11 +82,11 @@ function NavbarComponent() {
 
             {user && (
               <>
-                <a className="notifications">
+                <a href="#!" className="notifications">
                   <BellFillIcon />
                 </a>
                 <a
-                  href="#"
+                  href="#!"
                   onClick={() => {
                     history.push("/settings");
                   }}

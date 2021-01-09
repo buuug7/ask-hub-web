@@ -55,9 +55,9 @@ export default function SettingsPage() {
             className="btn primary"
             onClick={async (e) => {
               e.preventDefault();
-              const rs = await http.post(`/users/${user?.id}`, { name: profile.name });
-              setUserState(profile);
-              sessionStorage.setItem("user", JSON.stringify(profile));
+              const { data } = await http.post(`/users/${user?.id}`, { name: profile.name });
+              setUserState(data);
+              sessionStorage.setItem("user", JSON.stringify(data));
               SnackbarSubject.next("更新成功");
             }}
           >

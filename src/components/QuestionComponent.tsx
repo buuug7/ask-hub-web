@@ -35,8 +35,6 @@ function QuestionComponent({
   const [createAnswerText, setCreateAnswerText] = useState("");
   const user = useRecoilValue(userState);
 
-  console.log("user,", user);
-
   const getQuestion = useCallback(async () => {
     const { data } = await http.get("/questions/" + id);
     setQuestion(data);
@@ -48,7 +46,7 @@ function QuestionComponent({
         setShowAnswers(true);
       }
     });
-  }, [getQuestion]);
+  }, [getQuestion, defaultShowAnswers]);
 
   if (!question) {
     return <SkeletonComponent type="v2" />;
@@ -57,6 +55,7 @@ function QuestionComponent({
   return (
     <div className="QuestionComponent">
       <a
+        href="#!"
         className="title"
         onClick={() => {
           history.push(`/questions/view/${question.id}`);
@@ -66,6 +65,7 @@ function QuestionComponent({
       </a>
       <div className="meta">
         <a
+          href="#!"
           className="user"
           onClick={() => {
             history.push(`/users/${question.user?.email}`);
@@ -125,7 +125,7 @@ function QuestionComponent({
       {user && showCreateAnswer && (
         <div className="create-answer mt-2">
           <div className="mb-2">
-            <a href="#">{user?.email}</a>
+            <a href="#!">{user?.email}</a>
           </div>
           <ReactMdeWrap
             value={createAnswerText}
