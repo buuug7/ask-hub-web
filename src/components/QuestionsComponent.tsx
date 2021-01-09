@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { http } from "../http";
-import { Pagination, Question } from "../app.interface";
+import { Pagination, Question } from "../app.types";
 import { Link } from "react-router-dom";
 import { to } from "../util";
 import { useSetRecoilState } from "recoil";

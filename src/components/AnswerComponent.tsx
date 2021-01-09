@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Answer } from "../app.interface";
+import { Answer } from "../app.types";
 import { http } from "../http";
 import { useHistory } from "react-router-dom";
 import dayjs from "dayjs";

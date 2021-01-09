@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { http } from "../http";
-import { Question } from "../app.interface";
+import { Question } from "../app.types";
 import dayjs from "dayjs";
 import AnswersComponent from "./AnswersComponent";
 import { ShowdownConverter } from "../util";

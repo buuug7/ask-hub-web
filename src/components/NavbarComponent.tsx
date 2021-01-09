@@ -88,7 +88,7 @@ function NavbarComponent() {
                 <a
                   href="#"
                   onClick={() => {
-                    history.push("/logout");
+                    history.push("/settings");
                   }}
                 >
                   {`${user?.name}(${user?.email})`}

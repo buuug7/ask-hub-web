@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { http } from "../http";
-import { Tag } from "../app.interface";
+import { Tag } from "../app.types";
 import Select from "react-select";
 import SnackSubject from "../snackbar-subject";
 import { useRecoilValue } from "recoil";

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Answer, Pagination } from "../app.interface";
+import { Answer, Pagination } from "../app.types";
 import { http } from "../http";
 import AnswerComponent from "./AnswerComponent";
 

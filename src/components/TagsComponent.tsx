@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Tag } from "../app.interface";
+import { Tag } from "../app.types";
 import { http } from "../http";
 import "./TagsComponent.scss";
 

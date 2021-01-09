@@ -1,5 +1,5 @@
 import { atom } from "recoil";
-import { User } from "./app.interface";
+import { User } from "./app.types";
 import { getSessionUser } from "./util";
 
 export const userState = atom<User | null>({

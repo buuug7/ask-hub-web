@@ -1,7 +1,7 @@
 import { http } from "../http";
 import { useCallback, useEffect, useState } from "react";
 import { to } from "../util";
-import { Question } from "../app.interface";
+import { Question } from "../app.types";
 import QuestionComponent from "../components/QuestionComponent";
 import TagsComponent from "../components/TagsComponent";
 import "./HomePage.scss";

@@ -1,0 +1,26 @@
+@import "../../scss/variables";
+
+.SettingsIndex {
+  display: grid;
+
+  .menu {
+    margin: 0;
+    padding: 0;
+    > li {
+      text-align: center;
+      list-style: none;
+      border: 1px solid #ddd;
+      border-bottom: none;
+      padding: 0.3rem 1rem;
+      cursor: pointer;
+    }
+    > li:last-child {
+      border-bottom: 1px solid #ddd;
+    }
+  }
+
+  @media (min-width: $break-point) {
+    grid-template-columns: 230px auto;
+    grid-gap: 1rem;
+  }
+}
