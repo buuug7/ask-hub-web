@@ -1,5 +1,4 @@
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import LogoutComponent from "./components/LogoutComponent";
 import QuestionsComponent from "./components/QuestionsComponent";
 import TagsComponent from "./components/TagsComponent";
 import FullScreenLoading from "./components/FullScreenLoading/Index";
@@ -33,7 +32,6 @@ function AppBody() {
       <Switch>
         <Route exact path="/" children={<HomePage />} />
         <Route exact path="/login" children={<LoginPage />} />
-        <Route exact path="/logout" children={<LogoutComponent />} />
         <Route exact path="/questions" children={<QuestionsComponent />} />
         <Route exact path="/questions/create" children={<QuestionCreatePage />} />
         <Route exact path="/questions/view/:id" children={<QuestionPage />} />

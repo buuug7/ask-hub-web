@@ -30,7 +30,7 @@ http.interceptors.response.use(
     return response;
   },
   function (error) {
-    console.log("myError", error);
+    console.error(error);
     return Promise.reject(error);
   }
 );

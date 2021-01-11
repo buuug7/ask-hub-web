@@ -76,7 +76,7 @@ function NavbarComponent() {
                   history.push("/login");
                 }}
               >
-                login
+                登录
               </button>
             )}
 
