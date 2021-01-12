@@ -14,7 +14,7 @@ function Logout() {
             return;
           }
 
-          sessionStorage.clear();
+          localStorage.clear();
           window.location.href = "/";
           setTimeout(() => {
             window.location.reload();

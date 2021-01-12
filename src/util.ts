@@ -2,7 +2,7 @@ import { AxiosResponse } from "axios";
 import Showdown from "showdown";
 
 export function getSessionUser() {
-  const user = sessionStorage.getItem("user");
+  const user = localStorage.getItem("user");
   return user ? JSON.parse(user) : null;
 }
 

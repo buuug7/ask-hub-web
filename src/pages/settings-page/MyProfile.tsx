@@ -57,7 +57,7 @@ export default function SettingsPage() {
               e.preventDefault();
               const { data } = await http.post(`/users/${user?.id}`, { name: profile.name });
               setUserState(data);
-              sessionStorage.setItem("user", JSON.stringify(data));
+              localStorage.setItem("user", JSON.stringify(data));
               SnackbarSubject.next("更新成功");
             }}
           >

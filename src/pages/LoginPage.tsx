@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { http } from "../http";
 import { useHistory } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
-import { userState } from "../app.state";
+import { tokenState, userState } from "../app.state";
 import "./LoginPage.scss";
 import { ReactComponent as GithubIcon } from "bootstrap-icons/icons/github.svg";
 
@@ -11,19 +11,21 @@ function LoginPage() {
   const [email, setEmail] = useState<string>("ask@dev.com");
   const [password, setPassword] = useState("123456");
   const setUser = useSetRecoilState(userState);
+  const setToken = useSetRecoilState(tokenState);
 
   const login = async () => {
     const { data } = await http.post("/auth/login", {
       email: email,
       password: password,
     });
-    sessionStorage.setItem("token", data.token);
+    setToken(data.token);
+    localStorage.setItem("token", data.token);
   };
 
   const getUserInfo = async () => {
     const { data } = await http.get(`/users/profile/${email}`);
-    sessionStorage.setItem("user", JSON.stringify(data));
     setUser(data);
+    localStorage.setItem("user", JSON.stringify(data));
     history.push("/");
   };
 
@@ -83,7 +85,7 @@ function LoginPage() {
           </div>
         </form>
 
-        <hr/>
+        <hr />
         <div className="mt-4">
           <p>通过社交账号登录</p>
           <div>
