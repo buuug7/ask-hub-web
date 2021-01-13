@@ -7,7 +7,7 @@ export const http = axios.create({
   timeout: 1000 * 30,
   headers: {
     "content-type": "application/json; charset=utf-8",
-    Authorization: `Bearer ${getUserToken()}`,
+    authorization: `Bearer ${getUserToken()}`,
   },
 });
 

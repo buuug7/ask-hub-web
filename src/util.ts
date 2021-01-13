@@ -7,7 +7,7 @@ export function getSessionUser() {
 }
 
 export function getUserToken() {
-  return sessionStorage.getItem("token");
+  return localStorage.getItem("token");
 }
 
 /**

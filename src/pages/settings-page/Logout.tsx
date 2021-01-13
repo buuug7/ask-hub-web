@@ -16,9 +16,6 @@ function Logout() {
 
           localStorage.clear();
           window.location.href = "/";
-          setTimeout(() => {
-            window.location.reload();
-          }, 3000);
         }}
       >
         登出
