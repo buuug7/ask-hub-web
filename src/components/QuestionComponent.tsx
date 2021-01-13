@@ -10,8 +10,7 @@ import SkeletonComponent from "./SkeletonComponent";
 import { useRecoilValue } from "recoil";
 import { userState } from "../app.state";
 import SnackbarSubject from "../snackbar-subject";
-import ReactMdeWrap from "./ReactMdeWrap";
-
+import AnswerCreateOrUpdateComponent from "./AnswerCreateOrUpdateComponent";
 import "./QuestionComponent.scss";
 
 type QuestionComponentProps = {
@@ -31,8 +30,6 @@ function QuestionComponent({
   const [question, setQuestion] = useState<Question>();
   const [showAnswers, setShowAnswers] = useState(false);
   const [showCreateAnswer, setShowCreateAnswer] = useState(false);
-  const [selectedTab, setSelectedTab] = useState<"write" | "preview">("write");
-  const [createAnswerText, setCreateAnswerText] = useState("");
   const user = useRecoilValue(userState);
 
   const getQuestion = useCallback(async () => {
@@ -121,38 +118,15 @@ function QuestionComponent({
           </button>
         </div>
       )}
-
       {user && showCreateAnswer && (
-        <div className="create-answer mt-2">
-          <div className="mb-2">
-            <a href="#!">{user?.email}</a>
-          </div>
-          <ReactMdeWrap
-            value={createAnswerText}
-            onChange={setCreateAnswerText}
-            selectedTab={selectedTab}
-            onTabChange={setSelectedTab}
-          />
-          <div className="mt-2">
-            <button
-              className="btn primary"
-              onClick={async () => {
-                const data = {
-                  text: createAnswerText,
-                  question: {
-                    id: id,
-                  },
-                };
-                await http.post("/answers", data);
-                setShowCreateAnswer(false);
-                SnackbarSubject.next("成功提交");
-                setShowAnswers(false);
-              }}
-            >
-              提交
-            </button>
-          </div>
-        </div>
+        <AnswerCreateOrUpdateComponent
+          createOrUpdate="create"
+          questionId={id}
+          cb={() => {
+            setShowCreateAnswer(false);
+            setShowAnswers(false);
+          }}
+        />
       )}
 
       {showAnswers && (

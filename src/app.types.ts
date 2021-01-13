@@ -36,6 +36,7 @@ export interface Answer {
   createdAt: string;
   updatedAt: string;
   user: User;
+  questionId?: string;
   [propName: string]: any;
 }
 

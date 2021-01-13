@@ -1,6 +1,7 @@
 @import "~rfs/scss";
 
 .AnswerComponent {
+  position: relative;
   .meta {
     .updatedAt {
       @include rfs("1rem", "font-size");
