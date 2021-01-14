@@ -4,7 +4,6 @@ import { Question } from "../app.types";
 import dayjs from "dayjs";
 import AnswersComponent from "./AnswersComponent";
 import { ShowdownConverter } from "../util";
-import { useHistory } from "react-router-dom";
 import { ReactComponent as PencilIcon } from "bootstrap-icons/icons/pencil.svg";
 import SkeletonComponent from "./SkeletonComponent";
 import { useRecoilValue } from "recoil";
@@ -27,7 +26,6 @@ function QuestionComponent({
   showActions = false,
   defaultShowAnswers = false,
 }: QuestionComponentProps) {
-  const history = useHistory();
   const user = useRecoilValue(userState);
   const [question, setQuestion] = useState<Question>();
   const [showAnswers, setShowAnswers] = useState(false);
@@ -64,23 +62,11 @@ function QuestionComponent({
     <div className="QuestionComponent">
       {!showUpdateView && (
         <>
-          <a
-            href="#!"
-            className="title"
-            onClick={() => {
-              history.push(`/questions/view/${question.id}`);
-            }}
-          >
+          <a href={`/questions/view/${question.id}`} className="title">
             {question.title}
           </a>
           <div className="meta">
-            <a
-              href="#!"
-              className="user"
-              onClick={() => {
-                history.push(`/users/${question.user?.email}`);
-              }}
-            >
+            <a href={`/users/${question.user?.email}`} className="user">
               {question.user?.name}
             </a>
             <div className="updatedAt">

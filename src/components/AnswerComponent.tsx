@@ -1,17 +1,15 @@
 import React, { useCallback, useEffect, useState } from "react";
+import dayjs from "dayjs";
 import { Answer } from "../app.types";
 import { http } from "../http";
-import { useHistory } from "react-router-dom";
-import dayjs from "dayjs";
 import { useRecoilValue } from "recoil";
 import { userState } from "../app.state";
 import { ShowdownConverter } from "../util";
-import "./AnswerComponent.scss";
 import AnswerCreateOrUpdateComponent from "./AnswerCreateOrUpdateComponent";
 import SkeletonComponent from "./SkeletonComponent";
+import "./AnswerComponent.scss";
 
 function AnswerComponent({ id }: { id: string }) {
-  const history = useHistory();
   const user = useRecoilValue(userState);
   const [answer, setAnswer] = useState<Answer>();
   const [starCount, setStarCount] = useState(0);
@@ -69,13 +67,7 @@ function AnswerComponent({ id }: { id: string }) {
   return (
     <div className="AnswerComponent mb-4">
       <div className="meta">
-        <a
-          href="#!"
-          className="user"
-          onClick={() => {
-            history.push(`/users/profile/${answer?.user?.email}`);
-          }}
-        >
+        <a href={`/users/profile/${answer?.user?.email}`} className="user">
           {answer?.user?.name}
         </a>
         <div className="updatedAt">

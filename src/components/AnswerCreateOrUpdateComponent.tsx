@@ -27,7 +27,7 @@ export default function AnswerCreateOrUpdateComponent({
     if (answer) {
       setAnswerText(answer.text as string);
     }
-  }, []);
+  }, [answer]);
 
   const create = async () => {
     const data = {
