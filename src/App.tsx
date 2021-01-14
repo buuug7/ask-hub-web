@@ -14,7 +14,7 @@ import { RecoilRoot, useRecoilValue } from "recoil";
 import { loadingState } from "./app.state";
 import QuestionCreatePage from "./pages/QuestionCreatePage";
 import UserProfilePage from "./pages/UserProfilePage";
-import SettingsIndex from "./pages/settings-page/Index";
+import MyRelatedIndex from "./pages/my-related/Index";
 
 function FullScreenLoadingWrap() {
   const loading = useRecoilValue(loadingState);
@@ -37,7 +37,7 @@ function AppBody() {
         <Route exact path="/questions/view/:id" children={<QuestionPage />} />
         <Route exact path="/tags" children={<TagsComponent />} />
         <Route exact path="/users/:email" children={<UserProfilePage />} />
-        <Route exact path="/settings" children={<SettingsIndex />} />
+        <Route exact path="/my-related" children={<MyRelatedIndex />} />
         <Route exact path="/ui" children={<UiIndex />} />
       </Switch>
     </div>

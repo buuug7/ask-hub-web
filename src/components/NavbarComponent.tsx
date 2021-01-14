@@ -88,7 +88,7 @@ function NavbarComponent() {
                 <a
                   href="#!"
                   onClick={() => {
-                    history.push("/settings");
+                    history.push("/my-related");
                   }}
                 >
                   {`${user?.name}(${user?.email})`}

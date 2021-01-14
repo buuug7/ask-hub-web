@@ -1,6 +1,6 @@
 import "./Index.scss";
 import { useState } from "react";
-import MyProfile from "./MyProfile";
+import Profile from "./Profile";
 import Logout from "./Logout";
 
 const _menu = [
@@ -10,11 +10,11 @@ const _menu = [
   { name: "退出登录", key: "logout" },
 ];
 
-export default function SettingsIndex() {
+export default function MyRelatedIndex() {
   const [selectedMenu, setSelectedMenu] = useState(_menu[0]);
 
   return (
-    <div className="SettingsIndex mt-4">
+    <div className="MyRelatedIndex mt-4">
       <ul className="menu mb-3">
         {_menu.map((item) => (
           <li
@@ -29,7 +29,7 @@ export default function SettingsIndex() {
         ))}
       </ul>
       <div>
-        {selectedMenu.key === "profile" && <MyProfile />}
+        {selectedMenu.key === "profile" && <Profile />}
         {selectedMenu.key === "logout" && <Logout />}
       </div>
     </div>

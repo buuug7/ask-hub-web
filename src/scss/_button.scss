@@ -14,7 +14,7 @@
   background-color: $light;
   border: 1px solid $light;
 
-  padding: 0.375rem 0.75rem;
+  padding: 0.35rem 0.7rem;
   @include rfs(1rem, font-size);
 
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,

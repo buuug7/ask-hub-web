@@ -16,7 +16,7 @@ export default function SettingsPage() {
   }
 
   return (
-    <div className="SettingsPage">
+    <div className="Profile">
       <h4>个人资料</h4>
       <form>
         <div className="formGroup">
@@ -61,7 +61,7 @@ export default function SettingsPage() {
               SnackbarSubject.next("更新成功");
             }}
           >
-            更新用户资料
+            更新个人资料
           </button>
         </div>
       </form>
