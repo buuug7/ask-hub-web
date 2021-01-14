@@ -37,12 +37,16 @@ function QuestionComponent({
   const getQuestion = useCallback(async () => {
     const { data } = await http.get("/questions/" + id);
     setQuestion(data);
-  }, [id, questionUpdated]);
+  }, [id, questionUpdated]); /* eslint react-hooks/exhaustive-deps: off */
 
   const checkCanUpdate = useCallback(async () => {
+    if (!user) {
+      return;
+    }
+
     const { data } = await http.get(`/questions/${id}/canUpdate`);
     setCanUpdate(data);
-  }, [id]);
+  }, [id, user]);
 
   useEffect(() => {
     getQuestion().then(() => {
@@ -52,7 +56,7 @@ function QuestionComponent({
     });
 
     checkCanUpdate().then(() => {});
-  }, [getQuestion, defaultShowAnswers]);
+  }, [getQuestion, defaultShowAnswers, checkCanUpdate]);
 
   if (!question) {
     return <SkeletonComponent type="v2" />;

@@ -22,7 +22,7 @@ function AnswerComponent({ id }: { id: string }) {
   const getAnswer = useCallback(async () => {
     const { data } = await http.get(`/answers/${id}`);
     setAnswer(data);
-  }, [id, answerUpdated]);
+  }, [id, answerUpdated]); /* eslint react-hooks/exhaustive-deps: off */
 
   useEffect(() => {
     getAnswer().then(() => {});

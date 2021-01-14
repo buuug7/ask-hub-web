@@ -44,7 +44,7 @@ function QuestionCreateOrUpdateComponent({
         }
       }
     });
-  }, []);
+  }, [getTags, createOrUpdate, question]);
 
   const create = async () => {
     if (!user) {
