@@ -1,35 +1,110 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { http } from "../http";
-import { Tag } from "../app.types";
+import { Question, Tag } from "../app.types";
 import Select from "react-select";
 import SnackSubject from "../snackbar-subject";
 import { useRecoilValue } from "recoil";
 import { userState } from "../app.state";
 import ReactMdeWrap from "./ReactMdeWrap";
 
-import "./QuestionCreateComponent.scss";
+import "./QuestionCreateOrUpdateComponent.scss";
 
-function QuestionCreateComponent() {
+type QuestionCreateOrUpdateComponentProps = {
+  createOrUpdate: "create" | "update";
+  question?: Question;
+  callback: Function;
+};
+
+function QuestionCreateOrUpdateComponent({
+  createOrUpdate,
+  question,
+  callback,
+}: QuestionCreateOrUpdateComponentProps) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [selectedTab, setSelectedTab] = useState<"write" | "preview">("write");
   const [tags, setTags] = useState<Tag[]>([]);
   const [selectedTags, setSelectedTags] = useState(null);
+  const [loading, setLoading] = useState(false);
   const user = useRecoilValue(userState);
 
-  useEffect(() => {
-    async function getTags() {
-      const { data } = await http.get("/tags");
-      return data;
-    }
+  const getTags = useCallback(async () => {
+    const { data } = await http.get("/tags");
+    setTags(data);
+  }, []);
 
-    getTags().then((tags) => {
-      console.log("tags", tags);
-      setTags(tags);
+  useEffect(() => {
+    getTags().then(() => {
+      if (createOrUpdate === "update") {
+        if (question) {
+          setTitle(question.title);
+          setDescription(question.description);
+          // @ts-ignore
+          setSelectedTags(question.tags);
+        }
+      }
     });
   }, []);
 
-  console.log("selecteTags", selectedTags);
+  const create = async () => {
+    if (!user) {
+      SnackSubject.next("请先登录！");
+      return;
+    }
+
+    if (!title) {
+      SnackSubject.next("请填写标题！");
+      return;
+    }
+
+    let tags = selectedTags
+      ? // @ts-ignore
+        selectedTags.map((item) => {
+          return {
+            id: item.id,
+          };
+        })
+      : [];
+
+    setLoading(true);
+    const { data } = await http.post("/questions", {
+      title: title,
+      description: description,
+      tags: tags,
+    });
+
+    SnackSubject.next("新建成功");
+    setLoading(false);
+    setTitle("");
+    setDescription("");
+    setSelectedTags(null);
+    callback(data);
+  };
+
+  const update = async () => {
+    if (!title) {
+      SnackSubject.next("请填写标题！");
+      return;
+    }
+
+    let tags = selectedTags
+      ? // @ts-ignore
+        selectedTags.map((item) => {
+          return {
+            id: item.id,
+          };
+        })
+      : [];
+
+    const { data } = await http.put(`/questions/${question?.id}`, {
+      title: title,
+      description: description,
+      tags: tags,
+    });
+
+    SnackSubject.next("更新成功");
+    callback(data);
+  };
 
   return (
     <div className="QuestionCreateComponent">
@@ -80,41 +155,26 @@ function QuestionCreateComponent() {
         </div>
 
         <button
+          disabled={loading}
           className="btn primary"
           onClick={async (e) => {
             e.preventDefault();
 
-            if (!user) {
-              SnackSubject.next("请先登录！");
-              return;
+            switch (createOrUpdate) {
+              case "create":
+                await create();
+                return;
+              case "update":
+                await update();
+                return;
             }
-
-            if (!title) {
-              SnackSubject.next("请填写标题！");
-              return;
-            }
-
-            let tags = selectedTags
-              ? // @ts-ignore
-                selectedTags.map((item) => {
-                  return {
-                    id: item.id,
-                  };
-                })
-              : [];
-
-            await http.post("/questions", {
-              title: title,
-              description: description,
-              tags: tags,
-            });
           }}
         >
-          发布你的问题
+          {createOrUpdate === "create" ? "发布你的问题" : "更新问题"}
         </button>
       </form>
     </div>
   );
 }
 
-export default QuestionCreateComponent;
+export default QuestionCreateOrUpdateComponent;
