@@ -33,6 +33,8 @@ function QuestionComponent({
   const [showUpdateView, setShowUpdateView] = useState(false);
   const [canUpdate, setCanUpdate] = useState(false);
   const [questionUpdated, setQuestionUpdated] = useState(0);
+  const [isWatchByRequestUser, setIsStarByRequestUser] = useState(false);
+  const [watchCount, setWatchCount] = useState(0);
 
   const getQuestion = useCallback(async () => {
     const { data } = await http.get("/questions/" + id);
@@ -57,6 +59,26 @@ function QuestionComponent({
 
     checkCanUpdate().then(() => {});
   }, [getQuestion, defaultShowAnswers, checkCanUpdate]);
+
+  const queryWatchByRequestUser = useCallback(async () => {
+    const { data } = await http.get(`/questions/${id}/isWatchByUser`);
+    setIsStarByRequestUser(data);
+  }, [id, watchCount]);
+
+  useEffect(() => {
+    queryWatchByRequestUser().then(() => {});
+  }, [queryWatchByRequestUser]);
+
+  // watch related
+  const getQuestionWatchCount = useCallback(async () => {
+    const { data } = await http.get(`/questions/${id}/watchCount`);
+    setWatchCount(data);
+  }, [id]);
+
+  useEffect(() => {
+    getQuestionWatchCount().then((r) => {});
+  }, [getQuestionWatchCount]);
+  // end watch related
 
   if (!question) {
     return <SkeletonComponent type="v2" />;
@@ -123,7 +145,15 @@ function QuestionComponent({
           >
             {question.answersCount} 个回答
           </button>
-          <button className="btn mr-2">关注</button>
+          <button
+            className={`btn ${isWatchByRequestUser ? "primary" : ""} mr-2`}
+            onClick={async () => {
+              const { data } = await http.post(`/questions/${id}/toggleWatch`);
+              setWatchCount(data);
+            }}
+          >
+            {watchCount} 关注
+          </button>
           <button
             className={
               showCreateAnswer

@@ -13,13 +13,15 @@ import "./AnswerComponent.scss";
 function AnswerComponent({ id }: { id: string }) {
   const user = useRecoilValue(userState);
   const [answer, setAnswer] = useState<Answer>();
-  const [starCount, setStarCount] = useState(0);
-  const [isStarByRequestUser, setIsStarByRequestUser] = useState(false);
-  const [startToggleStar, setStartToggleStar] = useState(Math.random);
+
   const [canUpdate, setCanUpdate] = useState(false);
   const [showUpdateView, setShowUpdateView] = useState(false);
   const [answerUpdated, setAnswerUpdated] = useState(0);
 
+  const [starCount, setStarCount] = useState(0);
+  const [isStarByRequestUser, setIsStarByRequestUser] = useState(false);
+
+  // getAnswer
   const getAnswer = useCallback(async () => {
     const { data } = await http.get(`/answers/${id}`);
     setAnswer(data);
@@ -28,41 +30,53 @@ function AnswerComponent({ id }: { id: string }) {
   useEffect(() => {
     getAnswer().then(() => {});
   }, [getAnswer]);
+  // getAnswer end
 
+  // getAnswerStarCount
   const getAnswerStarCount = useCallback(async () => {
     const { data } = await http.get(`/answers/${id}/starCount`);
     setStarCount(data);
-  }, [id, startToggleStar]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [id]);
 
   useEffect(() => {
     getAnswerStarCount().then(() => {});
   }, [getAnswerStarCount]);
+  // getAnswerStarCount end
 
-  const checkIsStarByRequestUser = useCallback(async () => {
-    if (!user) {
-      return;
-    }
-
-    const { data } = await http.get(`/answers/${id}/isStarByRequestUser`);
-    setIsStarByRequestUser(data);
-  }, [id, startToggleStar]); // eslint-disable-line react-hooks/exhaustive-deps
-
+  // checkCanUpdate
   const checkCanUpdate = useCallback(async () => {
     if (!user) {
       return;
     }
-
     const { data } = await http.get(`/answers/${id}/canUpdate`);
     setCanUpdate(data);
   }, [id, user]);
 
   useEffect(() => {
-    checkIsStarByRequestUser().then(() => {});
     checkCanUpdate().then(() => {});
-  }, [checkIsStarByRequestUser, checkCanUpdate]);
+  }, [checkCanUpdate]);
+  // checkCanUpdate end
+
+  // checkIsStarByRequestUser
+  const checkIsStarByRequestUser = useCallback(async () => {
+    if (!user) {
+      return;
+    }
+    const { data } = await http.get(`/answers/${id}/isStarByUser`);
+    setIsStarByRequestUser(data);
+  }, [id, starCount]);
+
+  useEffect(() => {
+    checkIsStarByRequestUser().then(() => {});
+  }, [checkIsStarByRequestUser]);
+  // checkIsStarByRequestUser end
 
   if (!answer) {
-    return <SkeletonComponent />;
+    return (
+      <div className="mb-3">
+        <SkeletonComponent />
+      </div>
+    );
   }
 
   return (
@@ -100,8 +114,8 @@ function AnswerComponent({ id }: { id: string }) {
         <button
           disabled={user === null}
           onClick={async () => {
-            await http.post(`/answers/${id}/toggleStar`);
-            setStartToggleStar(Math.random);
+            const { data } = await http.post(`/answers/${id}/toggleStar`);
+            setStarCount(data);
           }}
           className={isStarByRequestUser ? "btn primary" : "btn"}
         >
