@@ -5,6 +5,7 @@ import { useRecoilValue } from "recoil";
 import { userState } from "../app.state";
 import { useEffect, useState } from "react";
 import { Answer } from "../app.types";
+import { to } from "../util";
 
 type AnswerCreateComponentProps = {
   createOrUpdate: "create" | "update";
@@ -36,9 +37,17 @@ export default function AnswerCreateOrUpdateComponent({
         id: questionId,
       },
     };
-    await http.post("/answers", data);
+
+    const [error, res] = await to(http.post("/answers", data));
+
+    if (error) {
+      const errorMessage = error.response?.data.message;
+      SnackbarSubject.next(errorMessage);
+      return;
+    }
+
     SnackbarSubject.next("成功提交");
-    cb();
+    cb(res?.data);
   };
 
   const update = async () => {

@@ -1,4 +1,4 @@
-import { AxiosResponse } from "axios";
+import {AxiosError, AxiosResponse} from "axios";
 import Showdown from "showdown";
 
 export function getSessionUser() {
@@ -16,7 +16,7 @@ export function getUserToken() {
  * @param promise
  * @param errorExt
  */
-export function to<T extends AxiosResponse, U>(
+export function to<T extends AxiosResponse, U extends AxiosError>(
   promise: Promise<T>,
   errorExt?: object
 ): Promise<[U | null, T | undefined]> {
