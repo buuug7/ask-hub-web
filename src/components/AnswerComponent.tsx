@@ -7,6 +7,7 @@ import { userState } from "../app.state";
 import { ShowdownConverter } from "../util";
 import AnswerCreateOrUpdateComponent from "./AnswerCreateOrUpdateComponent";
 import SkeletonComponent from "./SkeletonComponent";
+import HighLight from "./HighLight";
 import "./AnswerComponent.scss";
 
 function AnswerComponent({ id }: { id: string }) {
@@ -76,12 +77,9 @@ function AnswerComponent({ id }: { id: string }) {
       </div>
 
       {!showUpdateView && (
-        <div
-          className="text"
-          dangerouslySetInnerHTML={{
-            __html: ShowdownConverter.makeHtml(answer?.text),
-          }}
-        />
+        <div className="text">
+          <HighLight content={ShowdownConverter.makeHtml(answer.text)} />
+        </div>
       )}
 
       {showUpdateView && (

@@ -41,7 +41,7 @@ function QuestionsComponent() {
   }, [getQuestions]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <div className="Questions">
+    <div className="Questions mt-4">
       <ul>
         {pagination.data.map((item) => (
           <li key={item.id}>
