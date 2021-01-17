@@ -4,7 +4,6 @@ function Logout() {
   return (
     <div className="logout">
       <h4>退出登录</h4>
-      <p>确定要退出登录吗？</p>
       <button
         className="btn"
         onClick={() => {
@@ -18,7 +17,7 @@ function Logout() {
           window.location.href = "/";
         }}
       >
-        登出
+        退出登录
       </button>
     </div>
   );

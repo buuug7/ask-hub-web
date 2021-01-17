@@ -11,14 +11,14 @@ type AnswerCreateComponentProps = {
   createOrUpdate: "create" | "update";
   questionId: string;
   answer?: Partial<Answer>;
-  cb: Function;
+  callback: Function;
 };
 
 export default function AnswerCreateOrUpdateComponent({
   createOrUpdate,
   questionId,
   answer,
-  cb,
+  callback,
 }: AnswerCreateComponentProps) {
   const user = useRecoilValue(userState);
   const [answerText, setAnswerText] = useState("");
@@ -47,7 +47,7 @@ export default function AnswerCreateOrUpdateComponent({
     }
 
     SnackbarSubject.next("成功提交");
-    cb(res?.data);
+    callback(res?.data);
   };
 
   const update = async () => {
@@ -56,7 +56,7 @@ export default function AnswerCreateOrUpdateComponent({
     };
     await http.put(`/answers/${answer?.id}`, data);
     SnackbarSubject.next("更新成功");
-    cb();
+    callback();
   };
 
   return (

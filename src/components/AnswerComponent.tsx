@@ -10,7 +10,12 @@ import SkeletonComponent from "./SkeletonComponent";
 import HighLight from "./HighLight";
 import "./AnswerComponent.scss";
 
-function AnswerComponent({ id }: { id: string }) {
+type AnswerComponentProps = {
+  id: string;
+  callback?: Function;
+};
+
+function AnswerComponent({ id }: AnswerComponentProps) {
   const user = useRecoilValue(userState);
   const [answer, setAnswer] = useState<Answer>();
 
@@ -82,7 +87,7 @@ function AnswerComponent({ id }: { id: string }) {
   return (
     <div className="AnswerComponent mb-4">
       <div className="meta">
-        <a href={`/users/profile/${answer?.user?.email}`} className="user">
+        <a href={`/users/${answer?.user?.email}`} className="user">
           {answer?.user?.name}
         </a>
         <div className="updatedAt">
@@ -102,7 +107,7 @@ function AnswerComponent({ id }: { id: string }) {
             createOrUpdate="update"
             questionId={answer.questionId as string}
             answer={answer}
-            cb={() => {
+            callback={() => {
               setShowUpdateView(false);
               setAnswerUpdated((prevState) => ++prevState);
             }}

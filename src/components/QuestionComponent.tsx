@@ -36,11 +36,24 @@ function QuestionComponent({
   const [isWatchByRequestUser, setIsStarByRequestUser] = useState(false);
   const [watchCount, setWatchCount] = useState(0);
 
+  // getQuestion
   const getQuestion = useCallback(async () => {
     const { data } = await http.get("/questions/" + id);
     setQuestion(data);
   }, [id, questionUpdated]); /* eslint react-hooks/exhaustive-deps: off */
 
+  useEffect(() => {
+    getQuestion().then(() => {});
+  }, [getQuestion]);
+  // getQuestion end
+
+  useEffect(() => {
+    if (defaultShowAnswers) {
+      setShowAnswers(true);
+    }
+  }, [defaultShowAnswers]);
+
+  // checkCanUpdate
   const checkCanUpdate = useCallback(async () => {
     if (!user) {
       return;
@@ -51,14 +64,9 @@ function QuestionComponent({
   }, [id, user]);
 
   useEffect(() => {
-    getQuestion().then(() => {
-      if (defaultShowAnswers) {
-        setShowAnswers(true);
-      }
-    });
-
     checkCanUpdate().then(() => {});
-  }, [getQuestion, defaultShowAnswers, checkCanUpdate]);
+  }, [checkCanUpdate]);
+  // checkCanUpdate end
 
   const queryWatchByRequestUser = useCallback(async () => {
     const { data } = await http.get(`/questions/${id}/isWatchByUser`);
@@ -191,9 +199,10 @@ function QuestionComponent({
         <AnswerCreateOrUpdateComponent
           createOrUpdate="create"
           questionId={id}
-          cb={() => {
+          callback={() => {
             setShowCreateAnswer(false);
             setShowAnswers(false);
+            setQuestionUpdated((prevState) => ++prevState);
           }}
         />
       )}

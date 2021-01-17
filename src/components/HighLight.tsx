@@ -14,7 +14,7 @@ export default function HighLight({ content }: { content: string }) {
 
   useEffect(() => {
     updateCodeHighLight();
-  }, []);
+  });
 
   return <div ref={ref} dangerouslySetInnerHTML={{ __html: content }} />;
 }
