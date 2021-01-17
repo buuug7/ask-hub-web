@@ -26,6 +26,14 @@ function AnswerComponent({ id }: AnswerComponentProps) {
   const [starCount, setStarCount] = useState(0);
   const [isStarByRequestUser, setIsStarByRequestUser] = useState(false);
 
+  const [canDelete, setCanDelete] = useState(false);
+
+  useEffect(() => {
+    http.get(`/answers/${id}/canDelete`).then(({ data }) => {
+      setCanDelete(data);
+    });
+  }, [id]);
+
   // getAnswer
   const getAnswer = useCallback(async () => {
     const { data } = await http.get(`/answers/${id}`);
@@ -134,6 +142,17 @@ function AnswerComponent({ id }: AnswerComponentProps) {
             }}
           >
             {showUpdateView ? "关闭修改答案" : "修改答案"}
+          </button>
+        )}
+
+        {canDelete && (
+          <button
+            className="btn ml-2"
+            onClick={() => {
+              // TODO
+            }}
+          >
+            删除
           </button>
         )}
       </div>
