@@ -1,8 +1,8 @@
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import QuestionsComponent from "./components/QuestionsComponent";
-import TagsComponent from "./components/TagsComponent";
+import Questions from "./components/Questions";
+import Tags from "./components/Tags";
 import FullScreenLoading from "./components/FullScreenLoading/Index";
-import NavbarComponent from "./components/NavbarComponent";
+import Navbar from "./components/Navbar";
 import UiIndex from "./pages/ui/Index";
 import LoginPage from "./pages/LoginPage";
 import HomePage from "./pages/HomePage";
@@ -32,10 +32,10 @@ function AppBody() {
       <Switch>
         <Route exact path="/" children={<HomePage />} />
         <Route exact path="/login" children={<LoginPage />} />
-        <Route exact path="/questions" children={<QuestionsComponent />} />
+        <Route exact path="/questions" children={<Questions />} />
         <Route exact path="/questions/create" children={<QuestionCreatePage />} />
         <Route exact path="/questions/view/:id" children={<QuestionPage />} />
-        <Route exact path="/tags" children={<TagsComponent />} />
+        <Route exact path="/tags" children={<Tags />} />
         <Route exact path="/users/:email" children={<UserProfilePage />} />
         <Route exact path="/my-related" children={<MyRelatedIndex />} />
         <Route exact path="/ui" children={<UiIndex />} />
@@ -50,7 +50,7 @@ function App() {
       <div className="App">
         <BrowserRouter>
           <FullScreenLoadingWrap />
-          <NavbarComponent />
+          <Navbar />
           <AppBody />
           <SnackbarWrap />
         </BrowserRouter>

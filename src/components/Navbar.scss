@@ -1,6 +1,6 @@
 @import "../scss/variables";
 
-.navbar {
+.Navbar {
   position: relative;
   display: flex;
   flex-wrap: wrap;
@@ -133,7 +133,7 @@
 }
 
 @media (min-width: $break-point) {
-  .navbar {
+  .Navbar {
     flex-wrap: nowrap;
     justify-content: flex-start;
 
@@ -183,7 +183,7 @@
 }
 
 // light theme
-.navbar.light {
+.Navbar.light {
   background-color: $light;
 
   .toggleBtn {
@@ -210,7 +210,7 @@
 }
 
 // dark theme
-.navbar.dark {
+.Navbar.dark {
   background-color: $black;
   .brand {
     color: #fff;

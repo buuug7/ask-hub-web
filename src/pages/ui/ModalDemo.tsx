@@ -1,20 +1,20 @@
 import Modal from "../../components/Modal";
-import {useState} from "react";
+import { useState } from "react";
 
 export default function ModalDemo() {
   const [showModal, setShowModal] = useState(false);
 
   return (
     <div className="ModalDemo">
-      <a
-        href="#12"
+      <button
+        className="btn"
         onClick={(e) => {
           e.preventDefault();
           setShowModal(true);
         }}
       >
         open modal
-      </a>
+      </button>
       {showModal && (
         <Modal
           title="Lorem ipsum Dolor Sit"

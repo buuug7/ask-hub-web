@@ -7,19 +7,19 @@ import { useEffect, useState } from "react";
 import { Answer } from "../app.types";
 import { to } from "../util";
 
-type AnswerCreateComponentProps = {
-  createOrUpdate: "create" | "update";
+type AnswerCreateUpdateProps = {
+  type: "create" | "update";
   questionId: string;
   answer?: Partial<Answer>;
   callback: Function;
 };
 
-export default function AnswerCreateOrUpdateComponent({
-  createOrUpdate,
+export default function AnswerCreateUpdate({
+  type,
   questionId,
   answer,
   callback,
-}: AnswerCreateComponentProps) {
+}: AnswerCreateUpdateProps) {
   const user = useRecoilValue(userState);
   const [answerText, setAnswerText] = useState("");
   const [selectedTab, setSelectedTab] = useState<"write" | "preview">("write");
@@ -60,7 +60,7 @@ export default function AnswerCreateOrUpdateComponent({
   };
 
   return (
-    <div className="create-answer mt-2">
+    <div className="AnswerCreateUpdateProps mt-2">
       <div className="mb-2">
         <a href="#!">{user?.email}</a>
       </div>
@@ -74,7 +74,7 @@ export default function AnswerCreateOrUpdateComponent({
         <button
           className="btn primary"
           onClick={async () => {
-            switch (createOrUpdate) {
+            switch (type) {
               case "create":
                 await create();
                 break;

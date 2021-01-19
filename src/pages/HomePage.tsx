@@ -2,8 +2,8 @@ import { http } from "../http";
 import { useCallback, useEffect, useState } from "react";
 import { to } from "../util";
 import { Question } from "../app.types";
-import QuestionComponent from "../components/QuestionComponent";
-import TagsComponent from "../components/TagsComponent";
+import QuestionComponent from "../components/Question";
+import Tags from "../components/Tags";
 import "./HomePage.scss";
 
 function HomePage() {
@@ -39,7 +39,7 @@ function HomePage() {
       </div>
 
       <div className="HomePageRight">
-        <TagsComponent />
+        <Tags />
       </div>
     </div>
   );

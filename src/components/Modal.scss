@@ -1,4 +1,4 @@
-.modal {
+.Modal {
   box-sizing: border-box;
   position: fixed;
   width: 100%;
@@ -9,26 +9,27 @@
   left: 0;
   display: block;
 
-  .modal-dialog {
+  .modalDialog {
     position: relative;
     max-width: 500px;
     width: auto;
     background-color: #fff;
     margin: 2rem auto;
-    border-radius: 4px;
+    //border-radius: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
 
-    .modal-header {
+    .modalHeader {
       display: flex;
       flex-direction: row;
       align-items: center;
       justify-content: space-between;
-      padding: .5rem 1rem;
+      padding: 0.5rem 1rem;
       border-bottom: 1px solid #dee2e6;
       border-top-left-radius: 0.3rem;
       border-top-right-radius: 0.3rem;
     }
 
-    .modal-body {
+    .modalBody {
       position: relative;
       display: flex;
       flex-direction: column;
@@ -39,16 +40,15 @@
   }
 }
 
-.modal-open {
+.modalOpen {
   overflow: hidden;
+  .Modal {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
 }
 
-.modal-open .modal {
-  overflow-x: hidden;
-  overflow-y: auto;
-}
-
-.modal-mask {
+.modalMask {
   box-sizing: border-box;
   position: fixed;
   top: 0;

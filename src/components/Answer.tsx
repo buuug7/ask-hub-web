@@ -1,23 +1,23 @@
 import React, { useCallback, useEffect, useState } from "react";
 import dayjs from "dayjs";
-import { Answer } from "../app.types";
+import { Answer as AnswerType } from "../app.types";
 import { http } from "../http";
 import { useRecoilValue } from "recoil";
 import { userState } from "../app.state";
 import { ShowdownConverter } from "../util";
-import AnswerCreateOrUpdateComponent from "./AnswerCreateOrUpdateComponent";
-import SkeletonComponent from "./SkeletonComponent";
+import AnswerCreateUpdate from "./AnswerCreateUpdate";
+import Skeleton from "./Skeleton";
 import HighLight from "./HighLight";
-import "./AnswerComponent.scss";
+import "./Answer.scss";
 
-type AnswerComponentProps = {
+type AnswerProps = {
   id: string;
   callback?: Function;
 };
 
-function AnswerComponent({ id }: AnswerComponentProps) {
+function Answer({ id }: AnswerProps) {
   const user = useRecoilValue(userState);
-  const [answer, setAnswer] = useState<Answer>();
+  const [answer, setAnswer] = useState<AnswerType>();
 
   const [canUpdate, setCanUpdate] = useState(false);
   const [showUpdateView, setShowUpdateView] = useState(false);
@@ -87,13 +87,13 @@ function AnswerComponent({ id }: AnswerComponentProps) {
   if (!answer) {
     return (
       <div className="mb-3">
-        <SkeletonComponent />
+        <Skeleton />
       </div>
     );
   }
 
   return (
-    <div className="AnswerComponent mb-4">
+    <div className="Answer mb-4">
       <div className="meta">
         <a href={`/users/${answer?.user?.email}`} className="user">
           {answer?.user?.name}
@@ -111,8 +111,8 @@ function AnswerComponent({ id }: AnswerComponentProps) {
 
       {showUpdateView && (
         <div className="mb-2">
-          <AnswerCreateOrUpdateComponent
-            createOrUpdate="update"
+          <AnswerCreateUpdate
+            type="update"
             questionId={answer.questionId as string}
             answer={answer}
             callback={() => {
@@ -160,4 +160,4 @@ function AnswerComponent({ id }: AnswerComponentProps) {
   );
 }
 
-export default AnswerComponent;
+export default Answer;

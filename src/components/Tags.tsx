@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Tag } from "../app.types";
 import { http } from "../http";
-import "./TagsComponent.scss";
+import styles from "./Tags.module.scss";
 
-function TagsComponent() {
+function Tags() {
   const [tags, setTags] = useState<Tag[]>();
 
   const getTags = async () => {
@@ -16,7 +16,7 @@ function TagsComponent() {
   }, []);
 
   return (
-    <div className="TagsComponent">
+    <div className={styles.Tags}>
       <div className="HeadLine">
         <div className="title">分类</div>
       </div>
@@ -32,4 +32,4 @@ function TagsComponent() {
   );
 }
 
-export default TagsComponent;
+export default Tags;

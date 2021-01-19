@@ -1,4 +1,4 @@
-import QuestionCreateOrUpdateComponent from "../components/QuestionCreateOrUpdateComponent";
+import QuestionCreateUpdate from "../components/QuestionCreateUpdate";
 import "./QuestionCreatePage.scss";
 import { useHistory } from "react-router-dom";
 import { Question } from "../app.types";
@@ -8,10 +8,9 @@ function QuestionCreatePage() {
   return (
     <div className="QuestionCreatePage pt-4">
       <div className="createPanel">
-        <QuestionCreateOrUpdateComponent
-          createOrUpdate="create"
+        <QuestionCreateUpdate
+          type="create"
           callback={(rs: Question) => {
-            console.log('rs', rs)
             history.push(`/questions/view/${rs.id}`);
           }}
         />

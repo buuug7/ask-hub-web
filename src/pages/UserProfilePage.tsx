@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { User } from "../app.types";
 import { http } from "../http";
 import "./UserProfilePage.scss";
-import SkeletonComponent from "../components/SkeletonComponent";
+import Skeleton from "../components/Skeleton";
 
 export default function UserProfilePage() {
   // @ts-ignore
@@ -20,7 +20,7 @@ export default function UserProfilePage() {
   }, [getUserProfile]);
 
   if (!profile) {
-    return <SkeletonComponent />;
+    return <Skeleton />;
   }
 
   return (

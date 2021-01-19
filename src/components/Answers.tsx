@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Answer } from "../app.types";
 import { http } from "../http";
-import AnswerComponent from "./AnswerComponent";
+import AnswerComponent from "./Answer";
 
-function AnswersComponent({ questionId }: { questionId: string }) {
+function Answers({ questionId }: { questionId: string }) {
   const [answers, setAnswers] = useState<Answer[]>([]);
 
   const getAnswers = useCallback(async () => {
@@ -26,4 +26,4 @@ function AnswersComponent({ questionId }: { questionId: string }) {
   );
 }
 
-export default AnswersComponent;
+export default Answers;

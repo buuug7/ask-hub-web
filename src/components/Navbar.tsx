@@ -1,18 +1,20 @@
+import { useEffect, useRef, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
-import "./NavbarComponent.scss";
 import { useRecoilValue } from "recoil";
 import { userState } from "../app.state";
 import { ReactComponent as BellFillIcon } from "bootstrap-icons/icons/bell.svg";
 import { ReactComponent as SearchIcon } from "bootstrap-icons/icons/search.svg";
+import "./Navbar.scss";
 
-function NavbarComponent() {
+function Navbar() {
   const history = useHistory();
   const location = useLocation();
   const user = useRecoilValue(userState);
   const { pathname } = location;
+  const collapseRef = useRef(null);
 
   return (
-    <div className="navbar dark">
+    <div className="Navbar dark">
       <div className="container">
         <a href="/" className="brand">
           Askhub
@@ -20,23 +22,18 @@ function NavbarComponent() {
         <button
           className="toggleBtn"
           onClick={() => {
-            const collapseDom = document.querySelector(".navbar .collapse");
-            if (collapseDom) {
-              const displayNone = window.getComputedStyle(collapseDom).display === "none";
+            const dom = collapseRef.current;
 
-              if (displayNone) {
-                // @ts-ignore
-                collapseDom.style.display = "block";
-              } else {
-                // @ts-ignore
-                collapseDom.style.display = "none";
-              }
+            if (dom) {
+              const displayNone = window.getComputedStyle(dom).display === "none";
+              // @ts-ignore
+              dom.style.display = displayNone ? "block" : "none";
             }
           }}
         >
           <span className="toggleIcon" />
         </button>
-        <div className="collapse">
+        <div className="collapse" ref={collapseRef}>
           <div className="search">
             <SearchIcon className="icon" />
             <input className="formControl" type="text" placeholder="Search Askhub" />
@@ -85,14 +82,7 @@ function NavbarComponent() {
                 <a href="#!" className="notifications">
                   <BellFillIcon />
                 </a>
-                <a
-                  href="#!"
-                  onClick={() => {
-                    history.push("/my-related");
-                  }}
-                >
-                  {`${user?.name}(${user?.email})`}
-                </a>
+                <a href="/my-related">{`${user?.name}(${user?.email})`}</a>
               </>
             )}
           </div>
@@ -102,4 +92,4 @@ function NavbarComponent() {
   );
 }
 
-export default NavbarComponent;
+export default Navbar;

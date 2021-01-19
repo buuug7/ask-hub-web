@@ -7,19 +7,15 @@ import { useRecoilValue } from "recoil";
 import { userState } from "../app.state";
 import ReactMdeWrap from "./ReactMdeWrap";
 
-import "./QuestionCreateOrUpdateComponent.scss";
+import "./QuestionCreateUpdate.scss";
 
-type QuestionCreateOrUpdateComponentProps = {
-  createOrUpdate: "create" | "update";
+type QuestionCreateUpdateProps = {
+  type: "create" | "update";
   question?: Question;
   callback: Function;
 };
 
-function QuestionCreateOrUpdateComponent({
-  createOrUpdate,
-  question,
-  callback,
-}: QuestionCreateOrUpdateComponentProps) {
+function QuestionCreateUpdate({ type, question, callback }: QuestionCreateUpdateProps) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [selectedTab, setSelectedTab] = useState<"write" | "preview">("write");
@@ -35,7 +31,7 @@ function QuestionCreateOrUpdateComponent({
 
   useEffect(() => {
     getTags().then(() => {
-      if (createOrUpdate === "update") {
+      if (type === "update") {
         if (question) {
           setTitle(question.title);
           setDescription(question.description);
@@ -44,7 +40,7 @@ function QuestionCreateOrUpdateComponent({
         }
       }
     });
-  }, [getTags, createOrUpdate, question]);
+  }, [getTags, type, question]);
 
   const create = async () => {
     if (!user) {
@@ -107,7 +103,7 @@ function QuestionCreateOrUpdateComponent({
   };
 
   return (
-    <div className="QuestionCreateComponent">
+    <div className="QuestionCreateUpdate">
       <form>
         <div className="formGroup mb-3">
           <label className="formLabel">标题</label>
@@ -160,7 +156,7 @@ function QuestionCreateOrUpdateComponent({
           onClick={async (e) => {
             e.preventDefault();
 
-            switch (createOrUpdate) {
+            switch (type) {
               case "create":
                 await create();
                 return;
@@ -170,11 +166,11 @@ function QuestionCreateOrUpdateComponent({
             }
           }}
         >
-          {createOrUpdate === "create" ? "发布你的问题" : "更新问题"}
+          {type === "create" ? "发布你的问题" : "更新问题"}
         </button>
       </form>
     </div>
   );
 }
 
-export default QuestionCreateOrUpdateComponent;
+export default QuestionCreateUpdate;

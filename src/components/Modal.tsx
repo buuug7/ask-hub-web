@@ -1,5 +1,6 @@
-import { ReactNode, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { ReactComponent as CloseIcon } from "bootstrap-icons/icons/x.svg";
+import "./Modal.scss";
 
 type ModalProps = {
   close: Function;
@@ -19,8 +20,8 @@ export default function Modal({
 
   useEffect(() => {
     const modalMask = document.createElement("div");
-    modalMask.classList.add("modal-mask", "show");
-    document.body.classList.add( "modal-open");
+    modalMask.classList.add("modalMask", "show");
+    document.body.classList.add("modalOpen");
     document.body.append(modalMask);
 
     if (outsideDismiss) {
@@ -32,20 +33,20 @@ export default function Modal({
     }
 
     return () => {
-      document.body.classList.remove("modal-open");
+      document.body.classList.remove("modalOpen");
       document.body.removeChild(modalMask);
     };
   });
 
   let body = (
     <>
-      <div className="modal-header">
+      <div className="modalHeader">
         <div className="title">{title ? title : "My modal"}</div>
         <button className="btn" onClick={() => close()}>
           <CloseIcon />
         </button>
       </div>
-      <div className="modal-body">{children}</div>
+      <div className="modalBody">{children}</div>
     </>
   );
 
@@ -54,8 +55,8 @@ export default function Modal({
   }
 
   return (
-    <div className="modal show" ref={ref}>
-      <div className="modal-dialog">{body}</div>
+    <div className="Modal show" ref={ref}>
+      <div className="modalDialog">{body}</div>
     </div>
   );
 }
