@@ -33,7 +33,7 @@ function Question({
   const [showUpdateView, setShowUpdateView] = useState(false);
   const [canUpdate, setCanUpdate] = useState(false);
   const [questionUpdated, setQuestionUpdated] = useState(0);
-  const [isWatchByRequestUser, setIsStarByRequestUser] = useState(false);
+  const [isWatchByRequestUser, setIsWatchByRequestUser] = useState(false);
   const [watchCount, setWatchCount] = useState(0);
 
   // getQuestion
@@ -70,12 +70,15 @@ function Question({
 
   const queryWatchByRequestUser = useCallback(async () => {
     const { data } = await http.get(`/questions/${id}/isWatchByUser`);
-    setIsStarByRequestUser(data);
+    setIsWatchByRequestUser(data);
   }, [id, watchCount]);
 
   useEffect(() => {
+    if (!user) {
+      return;
+    }
     queryWatchByRequestUser().then(() => {});
-  }, [queryWatchByRequestUser]);
+  }, [queryWatchByRequestUser, user]);
 
   // watch related
   const getQuestionWatchCount = useCallback(async () => {
@@ -156,6 +159,10 @@ function Question({
           <button
             className={`btn ${isWatchByRequestUser ? "primary" : ""} mr-2`}
             onClick={async () => {
+              if (!user) {
+                SnackbarSubject.next("请先登陆！");
+                return;
+              }
               const { data } = await http.post(`/questions/${id}/toggleWatch`);
               setWatchCount(data);
             }}

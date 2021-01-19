@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { userState } from "../app.state";
