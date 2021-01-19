@@ -2,8 +2,9 @@
 
 .QuestionPage {
   display: grid;
+  width: 100%;
 
   @media (min-width: $break-point) {
-    grid-template-columns: auto 300px;
+    grid-template-columns: minmax(300px, auto) 300px;
   }
 }
