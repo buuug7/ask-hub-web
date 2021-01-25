@@ -93,14 +93,15 @@ function AnswerComponent({ id }: AnswerComponentProps) {
   }
 
   return (
-    <div className="AnswerComponent mb-4">
+    <div className="AnswerComponent mb-2">
       <div className="meta">
         <a href={`/users/${answer?.user?.email}`} className="user">
           {answer?.user?.name}
         </a>
-        <div className="updatedAt">
-          Last updated {dayjs(answer?.updatedAt).format("YYYY/MM/DD HH:mm")}
-        </div>
+        的回答
+        <span className="updatedAt">
+          ，最后更新时间 {dayjs(answer?.updatedAt).format("YYYY/MM/DD HH:mm")}
+        </span>
       </div>
 
       {!showUpdateView && (

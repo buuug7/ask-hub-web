@@ -211,7 +211,7 @@ function QuestionComponent({
         <>
           <hr />
           <div className="Answers">
-            <h4>Answers</h4>
+            <h4>回答</h4>
             <AnswersComponent questionId={id} />
           </div>
         </>

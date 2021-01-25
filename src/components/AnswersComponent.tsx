@@ -18,8 +18,11 @@ function AnswersComponent({ questionId }: { questionId: string }) {
   return (
     <div className="Answers">
       <div>
-        {answers.map((item) => (
-          <AnswerComponent id={item.id} key={item.id} />
+        {answers.map((item, index) => (
+          <>
+            <AnswerComponent id={item.id} key={item.id} />
+            {index !== answers.length - 1 && <hr />}
+          </>
         ))}
       </div>
     </div>
