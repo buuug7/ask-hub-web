@@ -4,7 +4,7 @@ import SnackbarSubject from "../../snackbar-subject";
 import React, { useState } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { userState } from "../../app.state";
-import SkeletonComponent from "../../components/SkeletonComponent";
+import Skeleton from "../../components/Skeleton";
 
 export default function SettingsPage() {
   const user = useRecoilValue(userState);
@@ -12,7 +12,7 @@ export default function SettingsPage() {
   const setUserState = useSetRecoilState(userState);
 
   if (!profile) {
-    return <SkeletonComponent />;
+    return <Skeleton />;
   }
 
   return (

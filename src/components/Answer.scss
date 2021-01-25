@@ -1,6 +1,6 @@
 @import "~rfs/scss";
 
-.AnswerComponent {
+.Answer {
   position: relative;
   .meta {
     .updatedAt {
@@ -11,5 +11,6 @@
 
   .text {
     margin: 1rem 0 1rem 0;
+    width: 100%;
   }
 }

@@ -16,7 +16,7 @@
 
   @media (min-width: $break-point) {
     display: grid;
-    grid-template-columns: auto 300px;
+    grid-template-columns: minmax(300px, auto) 300px;
     grid-column-gap: 1rem;
   }
 }

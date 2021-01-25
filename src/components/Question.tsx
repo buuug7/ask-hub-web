@@ -1,17 +1,17 @@
 import { useCallback, useEffect, useState } from "react";
 import { http } from "../http";
-import { Question } from "../app.types";
+import { Question as QuestionType } from "../app.types";
 import dayjs from "dayjs";
-import AnswersComponent from "./AnswersComponent";
+import Answers from "./Answers";
 import { ShowdownConverter } from "../util";
 import { ReactComponent as PencilIcon } from "bootstrap-icons/icons/pencil.svg";
-import SkeletonComponent from "./SkeletonComponent";
+import Skeleton from "./Skeleton";
 import { useRecoilValue } from "recoil";
 import { userState } from "../app.state";
 import SnackbarSubject from "../snackbar-subject";
-import AnswerCreateOrUpdateComponent from "./AnswerCreateOrUpdateComponent";
-import "./QuestionComponent.scss";
-import QuestionCreateOrUpdateComponent from "./QuestionCreateOrUpdateComponent";
+import AnswerCreateUpdate from "./AnswerCreateUpdate";
+import "./Question.scss";
+import QuestionCreateUpdate from "./QuestionCreateUpdate";
 
 type QuestionComponentProps = {
   id: string;
@@ -20,20 +20,20 @@ type QuestionComponentProps = {
   defaultShowAnswers?: boolean;
 };
 
-function QuestionComponent({
+function Question({
   id,
   showTags = false,
   showActions = false,
   defaultShowAnswers = false,
 }: QuestionComponentProps) {
   const user = useRecoilValue(userState);
-  const [question, setQuestion] = useState<Question>();
+  const [question, setQuestion] = useState<QuestionType>();
   const [showAnswers, setShowAnswers] = useState(false);
   const [showCreateAnswer, setShowCreateAnswer] = useState(false);
   const [showUpdateView, setShowUpdateView] = useState(false);
   const [canUpdate, setCanUpdate] = useState(false);
   const [questionUpdated, setQuestionUpdated] = useState(0);
-  const [isWatchByRequestUser, setIsStarByRequestUser] = useState(false);
+  const [isWatchByRequestUser, setIsWatchByRequestUser] = useState(false);
   const [watchCount, setWatchCount] = useState(0);
 
   // getQuestion
@@ -70,12 +70,15 @@ function QuestionComponent({
 
   const queryWatchByRequestUser = useCallback(async () => {
     const { data } = await http.get(`/questions/${id}/isWatchByUser`);
-    setIsStarByRequestUser(data);
+    setIsWatchByRequestUser(data);
   }, [id, watchCount]);
 
   useEffect(() => {
+    if (!user) {
+      return;
+    }
     queryWatchByRequestUser().then(() => {});
-  }, [queryWatchByRequestUser]);
+  }, [queryWatchByRequestUser, user]);
 
   // watch related
   const getQuestionWatchCount = useCallback(async () => {
@@ -89,11 +92,11 @@ function QuestionComponent({
   // end watch related
 
   if (!question) {
-    return <SkeletonComponent type="v2" />;
+    return <Skeleton type="v2" />;
   }
 
   return (
-    <div className="QuestionComponent">
+    <div className="Question">
       {!showUpdateView && (
         <>
           <a href={`/questions/view/${question.id}`} className="title">
@@ -129,8 +132,8 @@ function QuestionComponent({
 
       {showUpdateView && (
         <div className="mb-2">
-          <QuestionCreateOrUpdateComponent
-            createOrUpdate="update"
+          <QuestionCreateUpdate
+            type="update"
             question={question}
             callback={() => {
               // TODO
@@ -156,6 +159,10 @@ function QuestionComponent({
           <button
             className={`btn ${isWatchByRequestUser ? "primary" : ""} mr-2`}
             onClick={async () => {
+              if (!user) {
+                SnackbarSubject.next("请先登陆！");
+                return;
+              }
               const { data } = await http.post(`/questions/${id}/toggleWatch`);
               setWatchCount(data);
             }}
@@ -196,8 +203,8 @@ function QuestionComponent({
       )}
 
       {user && showCreateAnswer && (
-        <AnswerCreateOrUpdateComponent
-          createOrUpdate="create"
+        <AnswerCreateUpdate
+          type="create"
           questionId={id}
           callback={() => {
             setShowCreateAnswer(false);
@@ -211,8 +218,8 @@ function QuestionComponent({
         <>
           <hr />
           <div className="Answers">
-            <h4>回答</h4>
-            <AnswersComponent questionId={id} />
+            <h4 className="mb-3">回答</h4>
+            <Answers questionId={id} />
           </div>
         </>
       )}
@@ -220,4 +227,4 @@ function QuestionComponent({
   );
 }
 
-export default QuestionComponent;
+export default Question;

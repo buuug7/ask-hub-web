@@ -1,10 +1,11 @@
 @import "../scss/variables";
 @import "~rfs/scss";
 
-.QuestionComponent {
+.Question {
   background-color: #fff;
   padding: 1rem;
   position: relative;
+  width: 100%;
 
   .title {
     display: inline-block;

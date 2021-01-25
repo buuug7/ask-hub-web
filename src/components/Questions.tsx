@@ -6,7 +6,7 @@ import { to } from "../util";
 import { useSetRecoilState } from "recoil";
 import { loadingState } from "../app.state";
 
-function QuestionsComponent() {
+function Questions() {
   const setLoading = useSetRecoilState(loadingState);
   const [pagination, setPagination] = useState<Pagination<Question>>({
     meta: { total: 0, totalPage: 0, perPage: 10, currentPage: 1 },
@@ -72,4 +72,4 @@ function QuestionsComponent() {
   );
 }
 
-export default QuestionsComponent;
+export default Questions;

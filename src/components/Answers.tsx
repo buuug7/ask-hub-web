@@ -1,9 +1,10 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Answer } from "../app.types";
 import { http } from "../http";
-import AnswerComponent from "./AnswerComponent";
+import AnswerComponent from "./Answer";
+import "./Answers.scss";
 
-function AnswersComponent({ questionId }: { questionId: string }) {
+function Answers({ questionId }: { questionId: string }) {
   const [answers, setAnswers] = useState<Answer[]>([]);
 
   const getAnswers = useCallback(async () => {
@@ -19,14 +20,11 @@ function AnswersComponent({ questionId }: { questionId: string }) {
     <div className="Answers">
       <div>
         {answers.map((item, index) => (
-          <>
-            <AnswerComponent id={item.id} key={item.id} />
-            {index !== answers.length - 1 && <hr />}
-          </>
+          <AnswerComponent id={item.id} key={item.id} />
         ))}
       </div>
     </div>
   );
 }
 
-export default AnswersComponent;
+export default Answers;
